@@ -1,5 +1,6 @@
 Name,Abbreviation,Credit Value Class,Gameplay Type,$ Value,Credit Value,Found at
 Amazonite,AMZ,Rare,Mineral,2300,0.5,"MM3, TW2, TW3"
+Battery (Salvage),,Undesirable,Salvage,250,0.05,
 Biomass,BIO,Undesirable,Mineral,125,0.05,All
 Brine,,Liquid,Unknown,,1,Upcoming
 Calcite,CAL,Uncommon,Mineral,1050,0.35,"CC2, CC3, TW3"
@@ -12,6 +13,7 @@ Cobalt,COB,Uncommon,Mineral,1075,0.35,"MM1, TW3"
 Copper,COP,Uncommon,Mineral,1350,0.35,"CC2, MM4"
 Copper Wire,,Uncommon,Manufactured,1050,0.35,Manufactured
 Fiber Optic Strands,,Rare,Manufactured,2500,0.5,Manufactured
+Forcefield (Salvage),,Undesirable,Salvage,250,0.05,
 Galena,GAL,Uncommon,Mineral,1625,0.35,"MM1, TW4"
 Gem Dust,,Uncommon,Manufactured,1350,0.35,Manufactured
 Gold,GOL,Rare,Mineral,3000,0.5,TW4
@@ -43,3 +45,13 @@ Topaz (Cracked),TOP,Uncommon,Remains,1550,0.35,TW1
 Topaz (Flawless),TOP,Rare,Gem,31000,0.5,TW1
 Water,,Liquid,Unknown,,1,Upcoming
 Workerbot (Salvage),,Undesirable,Salvage,250,0.05,Wrecks
+,,-,,,0,
+,,-,,,0,
+,,-,,,0,
+,,-,,,0,
+,,-,,,0,
+,,-,,,0,
+,,-,,,0,
+,,-,,,0,
+,,-,,,0,
+,,-,,,0,
