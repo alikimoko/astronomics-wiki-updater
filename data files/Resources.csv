@@ -1,0 +1,45 @@
+Name,Abbreviation,Credit Value Class,Gameplay Type,$ Value,Credit Value,Found at
+Amazonite,AMZ,Rare,Mineral,2300,0.5,"MM3, TW2, TW3"
+Biomass,BIO,Undesirable,Mineral,125,0.05,All
+Brine,,Liquid,Unknown,,1,Upcoming
+Calcite,CAL,Uncommon,Mineral,1050,0.35,"CC2, CC3, TW3"
+Carbon,CAR,Undesirable,Mineral,250,0.05,"Carbonites, CC1, CC2"
+Carbon Fiber,,Uncommon,Manufactured,1050,0.35,Manufactured
+Chromite,CHR,Uncommon,Mineral,1300,0.35,TW1
+Citrine (Cracked),CIT,Uncommon,Remains,1125,0.35,TW4
+Citrine (Flawless),CIT,Rare,Gem,22500,0.5,TW4
+Cobalt,COB,Uncommon,Mineral,1075,0.35,"MM1, TW3"
+Copper,COP,Uncommon,Mineral,1350,0.35,"CC2, MM4"
+Copper Wire,,Uncommon,Manufactured,1050,0.35,Manufactured
+Fiber Optic Strands,,Rare,Manufactured,2500,0.5,Manufactured
+Galena,GAL,Uncommon,Mineral,1625,0.35,"MM1, TW4"
+Gem Dust,,Uncommon,Manufactured,1350,0.35,Manufactured
+Gold,GOL,Rare,Mineral,3000,0.5,TW4
+Graphite,,Uncommon,Manufactured,1075,0.35,Manufactured
+Gypsum,GYP,Common,Mineral,925,0.2,CC1
+Iron,IRN,Undesirable,Mineral,450,0.05,All
+Magnesite,MAG,Uncommon,Mineral,1175,0.35,TW1
+Mining Turret (Salvage),,Undesirable,Salvage,250,0.05,Wrecks
+Nickel,NIC,Common,Mineral,600,0.2,"CC1, CC4, MM2, TW2"
+Nitrogen,,Gas,Unknown,,1,Upcoming
+Opal (Cracked),OPA,Uncommon,Remains,1350,0.35,TW2
+Opal (Flawless),OPA,Rare,Gem,27000,0.5,TW2
+Oxygen,,Gas,Unknown,,1,Upcoming
+Plastics,,Uncommon,Manufactured,1050,0.35,Manufactured
+Platinum,PLA,Uncommon,Mineral,1750,0.35,"MM1, TW4"
+Plutonium,,Rare,Mineral,3750,0.5,Upcoming
+Polymer,,Common,Manufactured,600,0.2,Manufactured
+Resin,,Common,Manufactured,600,0.2,Manufactured
+Ruby (Cracked),RUB,Uncommon,Remains,1270,0.35,TW3
+Ruby (Flawless),RUB,Rare,Gem,25400,0.5,TW3
+Rutile,RUT,Uncommon,Mineral,1650,0.35,CC3
+Salt,SAL,Common,Mineral,850,0.2,"MM3, TW3"
+Sapphire (Cracked),SAP,Uncommon,Remains,1660,0.35,"MM2, MM3"
+Sapphire (Flawless),SAP,Rare,Gem,33200,0.5,"MM2, MM3"
+Silica,SIL,Undesirable,Surface Rocks Only,450,0.05,Silicates
+Silver,SLV,Rare,Mineral,2050,0.5,"CC4, MM4, TW1"
+Steel Rod,,Uncommon,Manufactured,1050,0.35,Manufactured
+Topaz (Cracked),TOP,Uncommon,Remains,1550,0.35,TW1
+Topaz (Flawless),TOP,Rare,Gem,31000,0.5,TW1
+Water,,Liquid,Unknown,,1,Upcoming
+Workerbot (Salvage),,Undesirable,Salvage,250,0.05,Wrecks

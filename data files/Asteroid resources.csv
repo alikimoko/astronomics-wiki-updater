@@ -1,0 +1,16 @@
+Internal id,In-Game ID,Composition,Region,Surface resource,Underground deposit (Common),Undergound deposit (Rare),Liquids,Gasses
+CubeCorpOutpost_00,CC,Station,Cube Corp,,,,,
+Cluster_Carbonite_01,CC1,Carbonite,Cube Corp,"Gypsum, Nickel",Carbon,Nickel,,
+Cluster_Silicate_02,CC2,Silicate,Cube Corp,Calcite,,"Calcite, Copper, Carbon",,-
+Cluster_Carbonite_03,CC3,Carbonite,Cube Corp,Rutile,,"Rutile, Calcite",,-
+Cluster_Metallic_04,CC4,Metallic,Cube Corp,Nickel,,"Nickel, Silver",-,
+MedusaMineralsOutpost_05,MM,Station,Medusa Minerals,,,,,
+Cluster_Metallic_06,MM1,Metallic,Medusa Minerals,"Cobalt, Galena",Platinum,,,
+Cluster_Carbonite_07,MM2,Carbonite,Medusa Minerals,"Nickel, Sapphire (Flawless)",,,,-
+Cluster_Metallic_08,MM3,Metallic,Medusa Minerals,"Salt, Sapphire (Flawless)",Amazonite,,,
+Cluster_Silicate_09,MM4,Silicate,Medusa Minerals,"Copper, Silver",Copper,,,-
+TWGemsOutpost_10,TW,Station,TW Gems,,,,,
+Cluster_Carbonite_11,TW1,Carbonite,TW Gems,"Chromite, Magnesite, Topaz (Flawless)",Silver,"Chromite, Magnesite, Topaz (Cracked)",,
+Cluster_Carbonite_12,TW2,Carbonite,TW Gems,"Amazonite, Nickel, Opal (Flawless)",,"Amazonite, Nickel, Opal (Cracked)",-,
+Cluster_Silicate_13,TW3,Silicate,TW Gems,"Calcite, Ruby (Flawless), Salt",,"Amazonite, Calcite, Cobalt, Salt, Ruby (Cracked)",,-
+Cluster_Silicate_14,TW4,Silicate,TW Gems,"Citrine (Flawless), Galena, Gold, Platinum","Citrine (Cracked), Galena",,,-

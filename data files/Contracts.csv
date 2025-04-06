@@ -1,0 +1,30 @@
+Station,Internal ID,Title,Required Quantity,Reward,Notes
+Cube Corp,CONTRACT_CUBE_CORP_Visit a Carbonite Asteroid,Visit a Carbonite Asteroid,,100,
+Cube Corp,CONTRACT_CUBE_CORP_Earn 500 Cube Credits,Earn 500 Cube Credits,,150,"Counts credits earned only. Losing credits through buying upgrades, equipment or fuel does not affect progress."
+Cube Corp,CONTRACT_CUBE_CORP_Visit a Silicate Asteroid,Visit a Silicate Asteroid,,125,
+Cube Corp,CONTRACT_CUBE_CORP_Purchase Mining Turret,Purchase Mining Turret,,300,
+Cube Corp,CONTRACT_CUBE_CORP_Upgrade Shuttle Forge,Upgrade Shuttle Forge,,400,
+Cube Corp,CONTRACT_CUBE_CORP_Upgrade Freighter Fuel,Upgrade Freighter Fuel,,150,
+Cube Corp,CONTRACT_CUBE_CORP_Reach 350 KKM,Reach 350 KKM,,100,Progress updates at the start and end of a jump
+Cube Corp,CONTRACT_CUBE_CORP_Build 5 Cranes,Build 5 Cranes,,500,"Progress is tracked at all times, even if the contract is not one of the active 3 (or has already been completed (this is why contract completion sounds keep playing if you build a crane with a pinned completed contract))"
+Cube Corp,CONTRACT_CUBE_CORP_Visit a Metallic Asteroid,Visit a Metallic Asteroid,,150,
+Cube Corp,CONTRACT_CUBE_CORP_Reach 550 KKM,Reach 550 KKM,,150,Progress updates at the start and end of a jump
+Cube Corp,CONTRACT_CUBE_CORP_Reach Medusa Mineral,Reach Medusa Mineral,,800,
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_GYPSUM_RAW,Raw Gypsum Delivery,1000,400,
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_NICKEL_RAW,Raw Nickel Delivery,1500,200,
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_CALCITE_RAW,Raw Calcite Delivery,2000,300,
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_RUTILE_RAW,Raw Rutile Delivery,2000,2000,
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_POLYMER_RAW,Polymer Delivery,500,500,"Made in Carbonator, manufacturing path"
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_AMAZONITE_RAW,Raw Amazonite Delivery,2000,300,"Is only found in underground deposits in MM, underground deposits path"
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_CARBON_FIBER_RAW,Carbon Fiber Delivery,2000,400,"Made in Converter from Polymer, manufacturing path"
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_STEEL_ROD_RAW,Steel Rod Delivery,4000,1000,"Made in Converter, manufacturing path"
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_COPPER_RAW,Raw Copper Delivery,6000,600,
+Medusa Minerals,CONTRACT_MEDUSA_RESOURCE_COBALT_RAW,Raw Cobalt Delivery,3000,600,
+TW Gems,CONTRACT_TW_GEMS_RESOURCE_RUBY_RAW,Cracked Ruby Delivery,5000,1000,Accepts both cracked and flawless Ruby
+TW Gems,CONTRACT_TW_GEMS_RESOURCE_SAPPHIRE_RAW,Cracked Sapphire Delivery,5000,1000,Accepts both cracked and flawless Sapphire
+TW Gems,CONTRACT_TW_GEMS_RESOURCE_OPAL_PURIFIED,Flawless Opal Delivery,1000,1000,
+TW Gems,CONTRACT_TW_GEMS_RESOURCE_GALENA_RAW,Raw Galena Delivery,5000,500,
+TW Gems,CONTRACT_TW_GEMS_RESOURCE_CITRINE_PURIFIED,Flawless Citrine Delivery,600,600,
+TW Gems,CONTRACT_TW_GEMS_RESOURCE_MAGNESITE_RAW,Raw Magnesite Delivery,2000,500,
+TW Gems,CONTRACT_TW_GEMS_RESOURCE_RUBY_PURIFIED,Flawless Ruby Delivery,1000,1000,
+TW Gems,CONTRACT_TW_GEMS_RESOURCE_TOPAZ_PURIFIED,Flawless Topaz Delivery,1000,1000,

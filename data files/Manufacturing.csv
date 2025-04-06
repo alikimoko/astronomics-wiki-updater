@@ -1,0 +1,29 @@
+Machine,Processing time,Product Name,Product Quantity,Input 1 Name,Input 1 Quantity,Input 2 Name,Input 2 Quantity,Input 3 Name,Input 3 Quantity,Input 4 Name,Input 4 Quantity,$ Change,Credits Change,Weight change
+Carbonator,25,Carbon,10,Biomass,50,-,,-,,-,,-3750,-2,-40
+Carbonator,25,Polymer,20,Biomass,50,-,,-,,-,,5750,1.5,-30
+Carbonator,25,Graphite,10,Carbon,50,-,,-,,-,,-1750,1,-40
+Carbonator,25,Resin,15,Biomass,50,-,,-,,-,,2750,0.5,-35
+Converter,60,Plastics,40,Resin,10,Silica,30,-,,-,,22500,10.5,0
+Converter,45,Steel Rod,25,Iron,20,Nickel,5,-,,-,,14250,6.75,0
+Converter,60,Carbon Fiber,30,Polymer,20,Carbon,20,-,,-,,14500,5.5,-10
+Converter,120,Copper Wire,40,Copper,30,Iron,10,-,,-,,-3000,3,0
+Converter,60,Fiber Optic Strands,50,Gem Dust,50,-,,-,,-,,57500,7.5,0
+Crusher,10,Gem Dust,10,Citrine (Cracked),10,-,,-,,-,,2250,0,0
+Crusher,10,Gem Dust,10,Citrine (Flawless),10,-,,-,,-,,-211500,-1.5,0
+Crusher,10,Gem Dust,10,Opal (Cracked),10,-,,-,,-,,0,0,0
+Crusher,10,Gem Dust,10,Opal (Flawless),10,-,,-,,-,,-256500,-1.5,0
+Crusher,10,Gem Dust,10,Ruby (Cracked),10,-,,-,,-,,800,0,0
+Crusher,10,Gem Dust,10,Ruby (Flawless),10,-,,-,,-,,-240500,-1.5,0
+Crusher,10,Gem Dust,10,Sapphire (Cracked),10,-,,-,,-,,-3100,0,0
+Crusher,10,Gem Dust,10,Sapphire (Flawless),10,-,,-,,-,,-318500,-1.5,0
+Crusher,10,Gem Dust,10,Topaz (Cracked),10,-,,-,,-,,-2000,0,0
+Crusher,10,Gem Dust,10,Topaz (Flawless),10,-,,-,,-,,-296500,-1.5,0
+,,-,,-,,-,,-,,-,,0,0,0
+,,-,,-,,-,,-,,-,,0,0,0
+,,-,,-,,-,,-,,-,,0,0,0
+,,-,,-,,-,,-,,-,,0,0,0
+,,-,,-,,-,,-,,-,,0,0,0
+,,-,,-,,-,,-,,-,,0,0,0
+,,-,,-,,-,,-,,-,,0,0,0
+,,-,,-,,-,,-,,-,,0,0,0
+,,-,,-,,-,,-,,-,,0,0,0
