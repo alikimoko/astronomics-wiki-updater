@@ -110,8 +110,11 @@ def run():
             gem_resource(row)
         elif row["Gameplay Type"] == "Manufactured":
             manufactured_resource(row)
-        elif row["Gameplay Type"] == "Unknown" or row["Gameplay Type"] == "Remains" or row["Gameplay Type"] == "":
-            # Ignore Unknown (future content), Remains (handled by Gem) and end of valid data
+        elif row["Gameplay Type"] == "Unknown"\
+                or row["Gameplay Type"] == "Remains"\
+                or row["Gameplay Type"] == ""\
+                or row["Found at"] == "Upcoming":
+            # Ignore Unknown (future content), Remains (handled by Gem), upcoming content and end of valid data
             pass
         else:
             generic_resource(row)
@@ -170,7 +173,7 @@ def generic_resource(data: dict):
 
 
 def gem_resource(data: dict):
-    gem_name = data["Name"].split()[0]
+    gem_name = data["Name"][:data["Name"].index("(") - 1]
     page = full_page(gem_name)
     if page_exists(page):
         # Update existing page
@@ -226,7 +229,7 @@ def salvage_resource(data: dict):
             data["$ Value"],
             ""
         )
-        base_equipment = data["Name"].split()[0]
+        base_equipment = data["Name"][:data["Name"].index("(") - 1]
         WIKITEXT += "The remains of a destroyed [[Equipment/{}|{}]]. " \
                     "You can collect it and repair it at the station for a reduced cost.\n" \
                     "[[Category:Salvage]]"\
