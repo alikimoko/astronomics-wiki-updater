@@ -97,8 +97,8 @@ def full_page(sub_page: str) -> str:
 
 
 def run():
-    with open("../data files/Resources.csv") as f:
-        raw_resource_data = csv.DictReader(f)
+    with open("data files/Resources.csv") as f:
+        raw_resource_data = [row for row in csv.DictReader(f)]
 
     # Column headers: Name, Abbreviation, Credit Value Class, Gameplay Type, $ Value, Credit Value, Found at
     # Split into resource categories
@@ -110,8 +110,8 @@ def run():
             gem_resource(row)
         elif row["Gameplay Type"] == "Manufactured":
             manufactured_resource(row)
-        elif row["Gameplay Type"] == "Unknown" or row["Gameplay Type"] == "Remains":
-            # Ignore Unknown (future content) and Remains (handled by Gem)
+        elif row["Gameplay Type"] == "Unknown" or row["Gameplay Type"] == "Remains" or row["Gameplay Type"] == "":
+            # Ignore Unknown (future content), Remains (handled by Gem) and end of valid data
             pass
         else:
             generic_resource(row)
