@@ -27,3 +27,6 @@ def create_page(page: str, content: str):
     )
 
 
+def database_update(page: str):
+    print("Forcing database update for page: " + page)
+    WIKI_CLIENT.touch_title(page)

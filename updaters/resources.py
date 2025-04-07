@@ -1,5 +1,5 @@
 import csv
-from.util import create_page, page_exists, run_template_modifier
+from.util import create_page, page_exists, run_template_modifier, database_update
 from mwcleric import TemplateModifierBase
 from mwparserfromhell.nodes import Template
 
@@ -50,6 +50,7 @@ class GenericResourceModifier(TemplateModifierBase):
             # for example, we don't want to modify template documentation or user sandboxes
             return
 
+        print("Updating Resource Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
         template.add("Abbreviation", info["Abbreviation"])
         template.add("Gameplay Type", info["Gameplay Type"])
@@ -69,6 +70,7 @@ class GemResourceModifier(TemplateModifierBase):
             # for example, we don't want to modify template documentation or user sandboxes
             return
 
+        print("Updating Gem Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
         template.add("Abbreviation", info["Abbreviation"])
         template.add("Cash Value", info["$ Value"])
@@ -86,6 +88,7 @@ class ManufacturedResourceModifier(TemplateModifierBase):
             # for example, we don't want to modify template documentation or user sandboxes
             return
 
+        print("Updating Manufactured Resource Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
         template.add("Abbreviation", info["Abbreviation"])
         template.add("Credit Value Class", info["Credit Value Class"])
@@ -98,7 +101,7 @@ def full_page(sub_page: str) -> str:
 
 def run():
     with open("data files/Resources.csv") as f:
-        raw_resource_data = [row for row in csv.DictReader(f)]
+        raw_resource_data = [row for row in csv.DictReader(f) if row["Name"] != "" and row["Name"] != "-"]
 
     # Column headers: Name, Abbreviation, Credit Value Class, Gameplay Type, $ Value, Credit Value, Found at
     # Split into resource categories
@@ -146,6 +149,23 @@ def run():
             "see [https://github.com/alikimoko/astronomics-wiki-updater astronomics-wiki-updater] for update script",
             new_data=data_to_update
         )
+
+
+def force_database_update():
+    with open("data files/Resources.csv") as f:
+        for row in csv.DictReader(f):
+            # Filter empty rows
+            if row["Name"] != "" and row["Name"] != "-":
+                # Filter future content
+                if row["Gameplay Type"] == "Unknown" \
+                        or row["Gameplay Type"] == "Remains" \
+                        or row["Gameplay Type"] == "" \
+                        or row["Found at"] == "Upcoming":
+                    continue
+                if row["Gameplay Type"] == "Gem":
+                    database_update(full_page(row["Name"][:row["Name"].index("(") - 1]))
+                else:
+                    database_update(full_page(row["Name"]))
 
 
 def generic_resource(data: dict):
@@ -238,4 +258,4 @@ def salvage_resource(data: dict):
         create_page(page, WIKITEXT)
 
 
-__all__ = ["run"]
+__all__ = ["run", "force_database_update"]

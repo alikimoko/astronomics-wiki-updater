@@ -1,9 +1,10 @@
 from .util import set_client
-from .resources import run as resource_updater
+from .resources import run as resource_updater, force_database_update as force_resource_update
 
 # Run all update scripts in
 updaters_to_run = [
-    resource_updater
+    #resource_updater,
+    force_resource_update,
 ]
 
 
