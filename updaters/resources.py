@@ -29,10 +29,16 @@ manufactured_template = """{{{{Manufactured Resource Infobox
 }}}}
 """
 
+salvage_template = """{{{{Salvage Infobox
+|Name={}
+|Equipment Name={}
+"""
+
 pages_to_update = {
     "generic": [],
     "gem": [],
-    "manufacture": []
+    "manufacture": [],
+    "salvage": [],
 }
 
 data_to_update = {}
@@ -95,6 +101,23 @@ class ManufacturedResourceModifier(TemplateModifierBase):
         template.add("Cash Value", info["$ Value"])
 
 
+class SalvageModifier(TemplateModifierBase):
+    def __init__(self, site, template, new_data, **data):
+        self.new_data = new_data
+
+        super().__init__(site, template, **data)
+
+    def update_template(self, template: Template):
+        if self.current_page.namespace != 0:
+            # don't do anything outside the main namespace
+            # for example, we don't want to modify template documentation or user sandboxes
+            return
+
+        print("Updating Salvage Infobox on " + self.current_page.page_title)
+        info = self.new_data[self.current_page.page_title]
+        template.add("Equipment Name", info["Name"][:info["Name"].index("(") - 1])
+
+
 def full_page(sub_page: str) -> str:
     return prefix + sub_page
 
@@ -149,6 +172,15 @@ def run():
             "see [https://github.com/alikimoko/astronomics-wiki-updater astronomics-wiki-updater] for update script",
             new_data=data_to_update
         )
+    if len(pages_to_update["salvage"]) > 0:
+        run_template_modifier(
+            SalvageModifier,
+            "Salvage Infobox",
+            pages_to_update["salvage"],
+            "Automatic update from new data, "
+            "see [https://github.com/alikimoko/astronomics-wiki-updater astronomics-wiki-updater] for update script",
+            new_data=data_to_update
+        )
 
 
 def force_database_update():
@@ -184,7 +216,7 @@ def generic_resource(data: dict):
             data["$ Value"],
             ""
         )
-        WIKITEXT += "{} can be found on {}".format(
+        WIKITEXT += "\n{} can be found on {}".format(
             data["Name"],
             ", ".join(["[[Asteroid/{}|{}]]".format(s, s) for s in data["Found at"].split(", ")])
         )
@@ -206,7 +238,7 @@ def gem_resource(data: dict):
             data["Abbreviation"],
             data["$ Value"]
         )
-        WIKITEXT += "{} can be found on {}".format(
+        WIKITEXT += "\n{} can be found on {}".format(
             gem_name,
             ", ".join(["[[Asteroid/{}|{}]]".format(s, s) for s in data["Found at"].split(", ")])
         )
@@ -237,22 +269,17 @@ def salvage_resource(data: dict):
     page = full_page(data["Name"])
     if page_exists(page):
         # Update existing page
-        pages_to_update["generic"].append(page)
+        pages_to_update["salvage"].append(page)
         data_to_update[page] = data
     else:
         # Create new page
-        WIKITEXT = generic_template.format(
-            data["Name"],
-            data["Abbreviation"],
-            "Salvage",
-            data["Credit Value Class"],
-            data["$ Value"],
-            ""
-        )
         base_equipment = data["Name"][:data["Name"].index("(") - 1]
-        WIKITEXT += "The remains of a destroyed [[Equipment/{}|{}]]. " \
-                    "You can collect it and repair it at the station for a reduced cost.\n" \
-                    "[[Category:Salvage]]"\
+        WIKITEXT = salvage_template.format(
+            data["Name"],
+            base_equipment
+        )
+        WIKITEXT += "\nThe remains of a destroyed [[Equipment/{}|{}]]. " \
+                    "You can collect it and repair it at the station for a reduced cost."\
             .format(base_equipment, base_equipment)
 
         create_page(page, WIKITEXT)
