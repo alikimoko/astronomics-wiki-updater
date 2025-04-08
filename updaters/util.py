@@ -23,7 +23,8 @@ def create_page(page: str, content: str):
         page,
         content,
         summary="Automated page creation, "
-                "see [https://github.com/alikimoko/astronomics-wiki-updater astronomics-wiki-updater] for update script"
+                "see [https://github.com/alikimoko/astronomics-wiki-updater] "
+                "for update script"
     )
 
 

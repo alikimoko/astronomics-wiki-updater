@@ -151,7 +151,7 @@ def run():
             "Resource Infobox",
             pages_to_update["generic"],
             "Automatic update from new data, "
-            "see [https://github.com/alikimoko/astronomics-wiki-updater astronomics-wiki-updater] for update script",
+            "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
             new_data=data_to_update
         )
     if len(pages_to_update["gem"]) > 0:
@@ -160,7 +160,7 @@ def run():
             "Gem Infobox",
             pages_to_update["gem"],
             "Automatic update from new data, "
-            "see [https://github.com/alikimoko/astronomics-wiki-updater astronomics-wiki-updater] for update script",
+            "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
             new_data=data_to_update
         )
     if len(pages_to_update["manufacture"]) > 0:
@@ -169,7 +169,7 @@ def run():
             "Manufactured Resource Infobox",
             pages_to_update["manufacture"],
             "Automatic update from new data, "
-            "see [https://github.com/alikimoko/astronomics-wiki-updater astronomics-wiki-updater] for update script",
+            "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
             new_data=data_to_update
         )
     if len(pages_to_update["salvage"]) > 0:
@@ -178,7 +178,7 @@ def run():
             "Salvage Infobox",
             pages_to_update["salvage"],
             "Automatic update from new data, "
-            "see [https://github.com/alikimoko/astronomics-wiki-updater astronomics-wiki-updater] for update script",
+            "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
             new_data=data_to_update
         )
 
