@@ -1,4 +1,4 @@
-Internal id,In-Game ID,Composition,Region,Surface resource,Underground deposit (Common),Undergound deposit (Rare),Liquids,Gasses
+Internal id,In-Game ID,Composition,Region,Surface resource,Underground deposit (Common),Underground deposit (Rare),Liquids,Gasses
 CubeCorpOutpost_00,CC,Station,Cube Corp,,,,,
 Cluster_Carbonite_01,CC1,Carbonite,Cube Corp,"Gypsum, Nickel",Carbon,Nickel,,
 Cluster_Silicate_02,CC2,Silicate,Cube Corp,Calcite,,"Calcite, Copper, Carbon",,-
