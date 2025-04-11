@@ -28,6 +28,8 @@ def create_page(page: str, content: str):
     )
 
 
-def database_update(page: str):
+def database_update(page: str) -> None:
+    if not page_exists(page):
+        return
     print("Forcing database update for page: " + page)
     WIKI_CLIENT.touch_title(page)
