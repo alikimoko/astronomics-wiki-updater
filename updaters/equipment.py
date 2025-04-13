@@ -18,7 +18,25 @@ simple_template = """{{{{Equipment Infobox/Single
 It can be purchased at the {} console in the {} tab
 """
 
-pages_to_update = []
+structure_template = """{{{{Equipment Infobox/Structure
+|Name={}
+|Station={}
+|{}={}
+|Build Cost={}
+|Short Description={}
+|In Game Description={}
+}}}}
+{}
+It can be purchased at the {} console in the {} tab
+"""
+
+pages_to_update = {
+    "simple": [],
+    "structure": [],
+    "leveled tool": [],
+    "modification": [],
+    "machine": [],
+}
 data_to_update = {}
 
 
@@ -36,6 +54,15 @@ def make_simple_page(title: str, entry: Dict[str, str]) -> None:
     args = [entry["Name"], entry["Type"], entry["Station Unlocked"]]\
            + (["Special Unlock", entry["Special Unlock"]] if entry["Special Unlock"] else ["Price", entry["Price"]])\
            + [entry["Short Description"], entry["In Game Description"], entry["Description"],
+              entry["Console"], entry["Tab"]]
+    WIWI_TEXT = simple_template.format(*args)
+    create_page(title, WIWI_TEXT)
+
+
+def make_structure_page(title: str, entry: Dict[str, str]) -> None:
+    args = [entry["Name"], entry["Station Unlocked"]]\
+           + (["Special Unlock", entry["Special Unlock"]] if entry["Special Unlock"] else ["Price", entry["Price"]])\
+           + [entry["Build Cost"], entry["Short Description"], entry["In Game Description"], entry["Description"],
               entry["Console"], entry["Tab"]]
     WIWI_TEXT = simple_template.format(*args)
     create_page(title, WIWI_TEXT)
@@ -75,6 +102,7 @@ def run():
 
     pages = {
         "simple": {},
+        "structure": {},
         "leveled tool": {},
         "modification": {},
         "machine": {},
@@ -93,6 +121,8 @@ def run():
             if page not in pages["modification"]:
                 pages["modification"][page] = []
             pages["modification"][page].append(entry)
+        elif entry["Type"] == "Structure":
+            pages["structure"][page] = entry
         elif entry["Type"] == "Manufacturing":
             pages["machine"][page] = entry
         else:
@@ -100,9 +130,15 @@ def run():
 
     for page, data in pages["simple"].items():
         if page_exists(page):
-            pass
+            pages_to_update["simple"].append(page)
         else:
             make_simple_page(page, data)
+
+    for page, data in pages["structure"].items():
+        if page_exists(page):
+            pages_to_update["structure"].append(page)
+        else:
+            make_structure_page(page, data)
 
     pprint(pages, width=500)
 
