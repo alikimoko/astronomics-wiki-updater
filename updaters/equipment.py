@@ -30,6 +30,19 @@ structure_template = """{{{{Equipment Infobox/Structure
 It can be purchased at the {} console in the {} tab
 """
 
+tool_template = """{{{{Equipment Infobox/Tool
+|Name={}
+|tabs={}
+|Stations={}
+|Special Unlocks={}
+|Prices={}
+|Short Descriptions={}
+|In Game Descriptions={}
+}}}}
+{}
+It can be purchased at the {} console in the {} tab
+"""
+
 pages_to_update = {
     "simple": [],
     "structure": [],
@@ -55,8 +68,7 @@ def make_simple_page(title: str, entry: Dict[str, str]) -> None:
            + (["Special Unlock", entry["Special Unlock"]] if entry["Special Unlock"] else ["Price", entry["Price"]])\
            + [entry["Short Description"], entry["In Game Description"], entry["Description"],
               entry["Console"], entry["Tab"]]
-    WIWI_TEXT = simple_template.format(*args)
-    create_page(title, WIWI_TEXT)
+    create_page(title, simple_template.format(*args))
 
 
 def make_structure_page(title: str, entry: Dict[str, str]) -> None:
@@ -64,8 +76,23 @@ def make_structure_page(title: str, entry: Dict[str, str]) -> None:
            + (["Special Unlock", entry["Special Unlock"]] if entry["Special Unlock"] else ["Price", entry["Price"]])\
            + [entry["Build Cost"], entry["Short Description"], entry["In Game Description"], entry["Description"],
               entry["Console"], entry["Tab"]]
-    WIWI_TEXT = simple_template.format(*args)
-    create_page(title, WIWI_TEXT)
+    create_page(title, structure_template.format(*args))
+
+
+def make_tool_page(title: str, entries: List[Dict[str, str]]) -> None:
+    args: List[str] = [
+        entries[0]['Group'],
+        ','.join([entry['Variant'] for entry in entries]),
+        ';;'.join([entry['Station Unlocked'] for entry in entries]),
+        ';;'.join([entry['Special Unlock'] for entry in entries]),
+        ';;'.join([entry['Price'] for entry in entries]),
+        ';;'.join([entry['Short Description'] for entry in entries]),
+        ';;'.join([entry['In Game Description'] for entry in entries]),
+        '<br />'.join([entry['Variant'] + ': ' + entry['Description'] for entry in entries]),
+        entries[0]['Console'],
+        entries[0]['Tab']
+    ]
+    create_page(title, tool_template.format(*args))
 
 
 class SimpleEquipmentModifier(TemplateModifierBase):
@@ -94,6 +121,56 @@ class SimpleEquipmentModifier(TemplateModifierBase):
             template.add("Price", info["Price"])
         template.add("Short Description", info["Short Description"])
         template.add("In Game Description", info["In Game Description"])
+
+
+class StructureEquipmentModifier(TemplateModifierBase):
+    def __init__(self, site, template, new_data, **data):
+        self.new_data = new_data
+
+        super().__init__(site, template, **data)
+
+    def update_template(self, template: Template):
+        if self.current_page.namespace != 0:
+            # don't do anything outside the main namespace
+            # for example, we don't want to modify template documentation or user sandboxes
+            return
+
+        print("Updating Structure Equipment Infobox on " + self.current_page.page_title)
+        info = self.new_data[self.current_page.page_title]
+        template.add("Station", info["Station Unlocked"])
+        if info["Special Unlock"]:
+            if template.has("Price"):
+                template.remove("Price")
+            template.add("Special Unlock", info["Special Unlock"])
+        else:
+            if template.has("Special Unlock"):
+                template.remove("Special Unlock")
+            template.add("Price", info["Price"])
+        template.add("Build Cost", info["Build Cost"])
+        template.add("Short Description", info["Short Description"])
+        template.add("In Game Description", info["In Game Description"])
+
+
+class ToolEquipmentModifier(TemplateModifierBase):
+    def __init__(self, site, template, new_data, **data):
+        self.new_data = new_data
+
+        super().__init__(site, template, **data)
+
+    def update_template(self, template: Template):
+        if self.current_page.namespace != 0:
+            # don't do anything outside the main namespace
+            # for example, we don't want to modify template documentation or user sandboxes
+            return
+
+        print("Updating Tool Equipment Infobox on " + self.current_page.page_title)
+        info = self.new_data[self.current_page.page_title]
+        template.add('tabs', ','.join([entry['Variant'] for entry in info]))
+        template.add('Stations', ';;'.join([entry['Station Unlocked'] for entry in info]))
+        template.add('Special Unlocks', ';;'.join([entry['Special Unlock'] for entry in info]))
+        template.add('Prices', ';;'.join([entry['Price'] for entry in info]))
+        template.add('Short Descriptions', ';;'.join([entry['Short Description'] for entry in info]))
+        template.add('In Game Descriptions', ';;'.join([entry['In Game Description'] for entry in info]))
 
 
 def run():
@@ -139,6 +216,12 @@ def run():
             pages_to_update["structure"].append(page)
         else:
             make_structure_page(page, data)
+
+    for page, data in pages["leveled tool"].items():
+        if page_exists(page):
+            pages_to_update["leveled tool"].append(page)
+        else:
+            make_tool_page(page, data)
 
     pprint(pages, width=500)
 
