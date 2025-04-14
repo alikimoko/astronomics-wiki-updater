@@ -43,6 +43,17 @@ tool_template = """{{{{Equipment Infobox/Tool
 It can be purchased at the {} console in the {} tab
 """
 
+modification_template = """{{{{Equipment Infobox/Modification
+|Name={}
+|Station={}
+|Price={}
+|Short Description={}
+|In Game Description={}
+}}}}
+{}
+It can be purchased at the {} console in the {} tab
+"""
+
 pages_to_update = {
     "simple": [],
     "structure": [],
@@ -93,6 +104,21 @@ def make_tool_page(title: str, entries: List[Dict[str, str]]) -> None:
         entries[0]['Tab']
     ]
     create_page(title, tool_template.format(*args))
+
+
+def make_modification_page(title: str, entries: List[Dict[str, str]]) -> None:
+    # This should be changed when there are multiple modifications for the same group
+    args = [
+        entries[0]["Group"],
+        entries[0]["Station Unlocked"],
+        entries[0]["Price"],
+        entries[0]["Short Description"],
+        entries[0]["In Game Description"],
+        entries[0]["Description"],
+        entries[0]["Console"],
+        entries[0]["Tab"]
+    ]
+    create_page(title, modification_template.format(*args))
 
 
 class SimpleEquipmentModifier(TemplateModifierBase):
@@ -173,6 +199,27 @@ class ToolEquipmentModifier(TemplateModifierBase):
         template.add('In Game Descriptions', ';;'.join([entry['In Game Description'] for entry in info]))
 
 
+class ModificationEquipmentModifier(TemplateModifierBase):
+    def __init__(self, site, template, new_data, **data):
+        self.new_data = new_data
+
+        super().__init__(site, template, **data)
+
+    def update_template(self, template: Template):
+        if self.current_page.namespace != 0:
+            # don't do anything outside the main namespace
+            # for example, we don't want to modify template documentation or user sandboxes
+            return
+
+        # change this when there are multiple pieces of equipment in a modification group
+        print("Updating Modification Equipment Infobox on " + self.current_page.page_title)
+        info = self.new_data[self.current_page.page_title]
+        template.add("Station", info[0]["Station Unlocked"])
+        template.add("Price", info[0]["Price"])
+        template.add("Short Description", info[0]["Short Description"])
+        template.add("In Game Description", info[0]["In Game Description"])
+
+
 def run():
     with open("data files/Equipment and blueprints.csv") as f:
         equipment_data = [row for row in csv.DictReader(f) if row["Name"] != ""]
@@ -222,6 +269,12 @@ def run():
             pages_to_update["leveled tool"].append(page)
         else:
             make_tool_page(page, data)
+
+    for page, data in pages["modification"].items():
+        if page_exists(page):
+            pages_to_update["modification"].append(page)
+        else:
+            make_modification_page(page, data)
 
     pprint(pages, width=500)
 
