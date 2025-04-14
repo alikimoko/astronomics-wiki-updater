@@ -1,6 +1,6 @@
 import csv
 from pprint import pprint
-from typing import Dict, List
+from typing import Dict, List, Union
 
 from .util import create_page, page_exists, run_template_modifier, database_update
 from mwcleric import TemplateModifierBase
@@ -53,6 +53,26 @@ modification_template = """{{{{Equipment Infobox/Modification
 {}
 It can be purchased at the {} console in the {} tab
 """
+
+manufacturing_template = """{{{{Equipment Infobox/Manufacturing
+|Name={}
+|Station={}
+|{}={}
+|Short Description={}
+|In Game Description={}
+|Recipes={}
+}}}}
+{}
+It can be purchased at the {} console in the {} tab
+"""
+
+manufacturing_recipe_template = """{{{{Equipment Infobox/Manufacturing/Recipe
+|Recipe ID={}
+|Machine={}
+|Processing Time={}
+|Ingredients={}
+|Products={}
+}}}}"""
 
 pages_to_update = {
     "simple": [],
@@ -119,6 +139,48 @@ def make_modification_page(title: str, entries: List[Dict[str, str]]) -> None:
         entries[0]["Tab"]
     ]
     create_page(title, modification_template.format(*args))
+
+
+def make_recipe(recipe: Dict[str, str]) -> str:
+    args = [
+        recipe["Identifier"],
+        recipe["Machine"],
+        recipe["Processing time"],
+    ]
+
+    ingredients = []
+    i = 1
+    while recipe.get(f"Input {i} Name", None):
+        if recipe[f'Input {i} Name'] == '-':
+            break
+        ingredients.append(f"{recipe[f'Input {i} Name']}:{recipe[f'Input {i} Quantity']}")
+        i += 1
+    args.append(','.join(ingredients))
+
+    products = []
+    i = 1
+    while recipe.get(f"Product {i} Name", None):
+        if recipe[f'Product {i} Name'] == '-':
+            break
+        products.append(f"{recipe[f'Product {i} Name']}:{recipe[f'Product {i} Quantity']}")
+        i += 1
+    args.append(','.join(products))
+
+    return manufacturing_recipe_template.format(*args)
+
+
+def make_machine_page(title: str, entry: Dict[str, Union[str, List[Dict[str, str]]]]):
+    args = [entry["Name"], entry["Station Unlocked"]] \
+           + (["Special Unlock", entry["Special Unlock"]] if entry["Special Unlock"] else ["Price", entry["Price"]]) \
+           + [
+                entry["Short Description"],
+                entry["In Game Description"],
+                ';;'.join([make_recipe(r) for r in entry["Recipes"]]),
+                entry["Description"],
+                entry["Console"],
+                entry["Tab"]
+           ]
+    create_page(title, manufacturing_template.format(*args))
 
 
 class SimpleEquipmentModifier(TemplateModifierBase):
@@ -223,6 +285,8 @@ class ModificationEquipmentModifier(TemplateModifierBase):
 def run():
     with open("data files/Equipment and blueprints.csv") as f:
         equipment_data = [row for row in csv.DictReader(f) if row["Name"] != ""]
+    with open("data files/Manufacturing.csv") as f:
+        recipe_data = [row for row in csv.DictReader(f) if row["Identifier"] != ""]
 
     pages = {
         "simple": {},
@@ -249,9 +313,15 @@ def run():
             pages["structure"][page] = entry
         elif entry["Type"] == "Manufacturing":
             pages["machine"][page] = entry
+            pages["machine"][page]["Recipes"] = []
         else:
             pages["simple"][page] = entry
 
+    for entry in recipe_data:
+        page = "Manufacturing/" + entry["Machine"]
+        pages["machine"][page]["Recipes"].append(entry)
+
+    # Make now pages or mark for update
     for page, data in pages["simple"].items():
         if page_exists(page):
             pages_to_update["simple"].append(page)
@@ -276,7 +346,11 @@ def run():
         else:
             make_modification_page(page, data)
 
-    pprint(pages, width=500)
+    for page, data in pages["machine"].items():
+        if page_exists(page):
+            pages_to_update["machine"].append(page)
+        else:
+            make_machine_page(page, data)
 
 
 def force_database_update():
