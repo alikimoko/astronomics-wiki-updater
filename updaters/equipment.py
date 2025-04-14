@@ -1,12 +1,12 @@
 import csv
 from pprint import pprint
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 from .util import create_page, page_exists, run_template_modifier, database_update
 from mwcleric import TemplateModifierBase
 from mwparserfromhell.nodes import Template
 
-simple_template = """{{{{Equipment Infobox/Single
+simple_template = """{{{{Equipment Infobox
 |Name={}
 |Category={}
 |Station={}
