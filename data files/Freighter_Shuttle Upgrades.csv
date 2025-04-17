@@ -1,44 +1,35 @@
-Name,Lvl 0 Effect,Lvl 1 Cost,Lvl 1 Credits,Lvl 1 Resource 1 Name,Lvl 1 Resource 1 Amount,Lvl 1 Resource 2 Name,Lvl 1 Resource 2 Amount,Lvl 1 Resource 3 Name,Lvl 1 Resource 3 Amount,Lvl 1 Resource 4 Name,Lvl 1 Resource 4 Amount,Lvl 1 Cost Equivalent,Lvl 1 Effect,Lvl 2 Cost,Lvl 2 Credits,Lvl 2 Resource 1 Name,Lvl 2 Resource 1 Amount,Lvl 2 Resource 2 Name,Lvl 2 Resource 2 Amount,Lvl 2 Resource 3 Name,Lvl 2 Resource 3 Amount,Lvl 2 Resource 4 Name,Lvl 2 Resource 4 Amount,Lvl 2 Cost Equivalent,Lvl 2 Effect,Lvl 3 Cost,Lvl 3 Credits,Lvl 3 Resource 1 Name,Lvl 3 Resource 1 Amount,Lvl 3 Resource 2 Name,Lvl 3 Resource 2 Amount,Lvl 3 Resource 3 Name,Lvl 3 Resource 3 Amount,Lvl 3 Resource 4 Name,Lvl 3 Resource 4 Amount,Lvl 3 Cost Equivalent,Lvl 3 Effect
-"Fuel Capacity
-Number of jumps in a full tank",2 Jumps,"500 Credits
+Name,Description,Affects,Lvl 0 Effect,Lvl 1 Cost,Lvl 1 Credits,Lvl 1 Resource 1 Name,Lvl 1 Resource 1 Amount,Lvl 1 Resource 2 Name,Lvl 1 Resource 2 Amount,Lvl 1 Resource 3 Name,Lvl 1 Resource 3 Amount,Lvl 1 Resource 4 Name,Lvl 1 Resource 4 Amount,Lvl 1 Cost Equivalent,Lvl 1 Effect,Lvl 2 Cost,Lvl 2 Credits,Lvl 2 Resource 1 Name,Lvl 2 Resource 1 Amount,Lvl 2 Resource 2 Name,Lvl 2 Resource 2 Amount,Lvl 2 Resource 3 Name,Lvl 2 Resource 3 Amount,Lvl 2 Resource 4 Name,Lvl 2 Resource 4 Amount,Lvl 2 Cost Equivalent,Lvl 2 Effect,Lvl 3 Cost,Lvl 3 Credits,Lvl 3 Resource 1 Name,Lvl 3 Resource 1 Amount,Lvl 3 Resource 2 Name,Lvl 3 Resource 2 Amount,Lvl 3 Resource 3 Name,Lvl 3 Resource 3 Amount,Lvl 3 Resource 4 Name,Lvl 3 Resource 4 Amount,Lvl 3 Cost Equivalent,Lvl 3 Effect
+Fuel Capacity,,Number of jumps in a full tank,2 Jumps,"500 Credits
 500 Biomass
 800 Carbon",500,Biomass,500,Carbon,800,-,,-,,565,3 Jumps,"2450 Credits
 300 Resin
 2000 Steel Rod",2450,Resin,300,Steel Rod,2000,-,,-,,3210,4 Jumps,TBA,,-,,-,,-,,-,,0,5 Jumps
-"Storage Capacity
-Weight capacity of the freighter",5000 kg,"1250 Credits
+Storage Capacity,,Storage capacity of the freighter,5000 kg,"1250 Credits
 900 Cobalt
 1500 Nickel",1250,Cobalt,900,Nickel,1500,-,,-,,1865,7500 kg,TBA,,-,,-,,-,,-,,0,10000 kg,TBA,,-,,-,,-,,-,,0,12500 kg
-"Manufacturing
-Manufacturing bay machine slots",None,"1800 Credits
+Manufacturing,The manufacturing and production capabilities of the freighter.,Number of manufacturing bay machine slots,Unavailable,"1800 Credits
 800 Cobalt
 3000 Iron",1800,Cobalt,800,Iron,3000,-,,-,,2230,"2 Slots
-UNLOCK CARBONATOR BLUEPRINT",TBA,,-,,-,,-,,-,,0,4 Slots,TBA,,-,,-,,-,,-,,0,7 Slots
-"Navigation
-Jump range",300 KKM,"760 Credits
+Unlock Manufacturing - Carbonator",TBA,,-,,-,,-,,-,,0,4 Slots,TBA,,-,,-,,-,,-,,0,7 Slots
+Navigation,The Navigation system makes it poossible to plot a safe path for Hyperjumping to moving objects.,Maximum jump range to asteroids and empty space,300 KKM,"760 Credits
 500 Rutile",760,Rutile,500,-,,-,,-,,935,350 KKM,"1900 Credits
 500 Chromite
 1000 Fiber Optic Strands",1900,Chromite,500,Fiber Optic Strands,1000,-,,-,,2575,450 KKM,TBA,,-,,-,,-,,-,,0,600 KKM
-"Scanner
-Resource scanner range",200 KKM,"540 Credits
+Scanner,The scanner allows you to detect asteroid types and informs about the resources they may contain.,Maximum scanner range,200 KKM,"540 Credits
 500 Nickel
 500 Silica",540,Nickel,500,Silica,500,-,,-,,665,300 KKM,"1800 Credits
 750 Magnesite
 750 Silver",1800,Magnesite,750,Silver,750,-,,-,,2437.5,600 KKM,TBA,,-,,-,,-,,-,,0,900 KKM
-"Shuttle Forge
-Molten iron capacity of the shuttle forge",None,"450 Credits
-300 Iron",450,Iron,300,-,,-,,-,,465,"60 molten iron in shuttle forge
-UNLOCK CRANE BLUEPRINT","2520 Credits
+Shuttle Forge,Add a forger to your shuttle that produces molten iron that can be used for construction of infrastructure on the asteroid surface.,Molten iron capacity,Unavailable,"450 Credits
+300 Iron",450,Iron,300,-,,-,,-,,465,"60
+Unlock Structure - Standard Crane","2520 Credits
 1500 Gem Dust
 500 Resin
 1000 Iron",2520,Gem Dust,1500,Resin,500,Iron,1000,-,,3195,90,TBA,,-,,-,,-,,-,,0,
-"Shuttle Equipment
-Equipment capacity on the shuttle",4,"1250 Credits
-1000 Galena",1250,Galena,1000,-,,-,,-,,1600,8,"1890 Credits
+Shuttle Equipment,The equipment carrying capacity of the shuttle that makes space for Workerbots and Mining Turrets to the asteroid surface,Available equipment slots,4 Slots,"1250 Credits
+1000 Galena",1250,Galena,1000,-,,-,,-,,1600,8 Slots,"1890 Credits
 800 Carbon Fiber
-450 Flawless Topaz",1890,Carbon Fiber,800,Topaz (Flawless),450,-,,-,,2395,12,TBA,,-,,-,,-,,-,,0,16
-"Shuttle Storage
-Weight capacity for the shuttle",2500 kg,TBA,,-,,-,,-,,-,,0,3500 kg,,,-,,-,,-,,-,,0,,,,-,,-,,-,,-,,0,
-"Shuttle Delivery
-Enables workers to deliver equipment stored on the shuttle",None,"3200 Credits
+450 Flawless Topaz",1890,Carbon Fiber,800,Topaz (Flawless),450,-,,-,,2395,12 Slots,TBA,,-,,-,,-,,-,,0,16 Slots
+Shuttle Storage,,Storage capacity of the shuttle while in flight,2500 kg,TBA,,-,,-,,-,,-,,0,3500 kg,,,-,,-,,-,,-,,0,,,,-,,-,,-,,-,,0,
+Shuttle Delivery,Capability to issue delivery orders for Workerbots to bring turrets into the field,Unlock,Disabled,"3200 Credits
 500 Fiber Optic Strands",3200,Fiber Optic Strands,500,-,,-,,-,,3450,Enabled,,,-,,-,,-,,-,,0,,,,-,,-,,-,,-,,0,
