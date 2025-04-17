@@ -1,5 +1,4 @@
 import csv
-from pprint import pprint
 from typing import Dict, List, Union
 
 from .util import create_page, page_exists, run_template_modifier, database_update
@@ -282,6 +281,35 @@ class ModificationEquipmentModifier(TemplateModifierBase):
         template.add("In Game Description", info[0]["In Game Description"])
 
 
+class MachineEquipmentModifier(TemplateModifierBase):
+    def __init__(self, site, template, new_data, **data):
+        self.new_data = new_data
+
+        super().__init__(site, template, **data)
+
+    def update_template(self, template: Template):
+        if self.current_page.namespace != 0:
+            # don't do anything outside the main namespace
+            # for example, we don't want to modify template documentation or user sandboxes
+            return
+
+        # change this when there are multiple pieces of equipment in a modification group
+        print("Updating Manufacturing Equipment Infobox on " + self.current_page.page_title)
+        info = self.new_data[self.current_page.page_title]
+        template.add("Station", info["Station Unlocked"])
+        if info["Special Unlock"]:
+            if template.has("Price"):
+                template.remove("Price")
+            template.add("Special Unlock", info["Special Unlock"])
+        else:
+            if template.has("Special Unlock"):
+                template.remove("Special Unlock")
+            template.add("Price", info["Price"])
+        template.add("Short Description", info["Short Description"])
+        template.add("In Game Description", info["In Game Description"])
+        template.add("Recipes", ';;'.join([make_recipe(r) for r in info["Recipes"]]))
+
+
 def run():
     with open("data files/Equipment and blueprints.csv") as f:
         equipment_data = [row for row in csv.DictReader(f) if row["Name"] != ""]
@@ -325,32 +353,64 @@ def run():
     for page, data in pages["simple"].items():
         if page_exists(page):
             pages_to_update["simple"].append(page)
+            data_to_update[page] = data
         else:
             make_simple_page(page, data)
 
     for page, data in pages["structure"].items():
         if page_exists(page):
             pages_to_update["structure"].append(page)
+            data_to_update[page] = data
         else:
             make_structure_page(page, data)
 
     for page, data in pages["leveled tool"].items():
         if page_exists(page):
             pages_to_update["leveled tool"].append(page)
+            data_to_update[page] = data
         else:
             make_tool_page(page, data)
 
     for page, data in pages["modification"].items():
         if page_exists(page):
             pages_to_update["modification"].append(page)
+            data_to_update[page] = data
         else:
             make_modification_page(page, data)
 
     for page, data in pages["machine"].items():
         if page_exists(page):
             pages_to_update["machine"].append(page)
+            data_to_update[page] = data
         else:
             make_machine_page(page, data)
+
+    modifier_class = {
+        "simple": SimpleEquipmentModifier,
+        "structure": StructureEquipmentModifier,
+        "leveled tool": ToolEquipmentModifier,
+        "modification": ModificationEquipmentModifier,
+        "machine": MachineEquipmentModifier,
+    }
+
+    modifier_name = {
+        "simple": "Equipment Infobox",
+        "structure": "Equipment Infobox/Structure",
+        "leveled tool": "Equipment Infobox/Tool",
+        "modification": "Equipment Infobox/Modification",
+        "machine": "Equipment Infobox/Manufacturing",
+    }
+
+    for group in pages_to_update.keys():
+        if len(pages_to_update[group]) > 0:
+            run_template_modifier(
+                modifier_class[group],
+                modifier_name[group],
+                pages_to_update[group],
+                "Automatic update from new data, "
+                "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
+                new_data=data_to_update
+            )
 
 
 def force_database_update():
