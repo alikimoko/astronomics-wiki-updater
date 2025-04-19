@@ -14,13 +14,13 @@ generic_template = """{{{{Resource Infobox
 |Value Modifier={}
 }}}}"""
 
-gem_template = """{{{{Gem Infobox
+gem_template = """{{{{Resource Infobox/Gem
 |Name={}
 |Abbreviation={}
 |Cash Value={}
 }}}}"""
 
-manufactured_template = """{{{{Manufactured Resource Infobox
+manufactured_template = """{{{{Resource Infobox/Manufactured
 |Name={}
 |Abbreviation={}
 |Credit Value Class={}
@@ -29,7 +29,7 @@ manufactured_template = """{{{{Manufactured Resource Infobox
 }}}}
 """
 
-salvage_template = """{{{{Salvage Infobox
+salvage_template = """{{{{Resource Infobox/Salvage
 |Name={}
 |Equipment Name={}
 """
@@ -157,7 +157,7 @@ def run():
     if len(pages_to_update["gem"]) > 0:
         run_template_modifier(
             GemResourceModifier,
-            "Gem Infobox",
+            "Resource Infobox/Gem",
             pages_to_update["gem"],
             "Automatic update from new data, "
             "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
@@ -166,7 +166,7 @@ def run():
     if len(pages_to_update["manufacture"]) > 0:
         run_template_modifier(
             GenericResourceModifier,
-            "Manufactured Resource Infobox",
+            "Resource Infobox/Manufactured",
             pages_to_update["manufacture"],
             "Automatic update from new data, "
             "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
@@ -175,7 +175,7 @@ def run():
     if len(pages_to_update["salvage"]) > 0:
         run_template_modifier(
             SalvageModifier,
-            "Salvage Infobox",
+            "Resource Infobox/Salvage",
             pages_to_update["salvage"],
             "Automatic update from new data, "
             "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
