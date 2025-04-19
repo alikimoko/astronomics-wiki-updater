@@ -1,4 +1,6 @@
 import csv
+from typing import Tuple
+
 from.util import create_page, page_exists, run_template_modifier, database_update
 from mwcleric import TemplateModifierBase
 from mwparserfromhell.nodes import Template
@@ -32,6 +34,9 @@ manufactured_template = """{{{{Resource Infobox/Manufactured
 salvage_template = """{{{{Resource Infobox/Salvage
 |Name={}
 |Equipment Name={}
+|Equipment Type={}
+}}}}
+The remains of a destroyed [[{}/{}|{}]]. You can collect it and repair it at the station for a reduced cost.
 """
 
 pages_to_update = {
@@ -115,7 +120,9 @@ class SalvageModifier(TemplateModifierBase):
 
         print("Updating Salvage Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
-        template.add("Equipment Name", info["Name"][:info["Name"].index("(") - 1])
+        base_equipment, base_type = salvage_base_equipment(info["Name"])
+        template.add("Equipment Name", base_equipment)
+        template.add("Equipment Type", base_type)
 
 
 def full_page(sub_page: str) -> str:
@@ -165,7 +172,7 @@ def run():
         )
     if len(pages_to_update["manufacture"]) > 0:
         run_template_modifier(
-            GenericResourceModifier,
+            ManufacturedResourceModifier,
             "Resource Infobox/Manufactured",
             pages_to_update["manufacture"],
             "Automatic update from new data, "
@@ -273,16 +280,24 @@ def salvage_resource(data: dict):
         data_to_update[page] = data
     else:
         # Create new page
-        base_equipment = data["Name"][:data["Name"].index("(") - 1]
-        WIKITEXT = salvage_template.format(
+        base_equipment, equipment_type = salvage_base_equipment(data["Name"])
+        create_page(page, salvage_template.format(
             data["Name"],
-            base_equipment
-        )
-        WIKITEXT += "\nThe remains of a destroyed [[Equipment/{}|{}]]. " \
-                    "You can collect it and repair it at the station for a reduced cost."\
-            .format(base_equipment, base_equipment)
+            base_equipment,
+            equipment_type,
+            equipment_type,
+            base_equipment,
+            base_equipment,
+        ))
 
-        create_page(page, WIKITEXT)
+
+def salvage_base_equipment(name: str) -> Tuple[str, str]:
+    base_name = name[:name.index("(") - 1]
+    with open("data files/Equipment and blueprints.csv") as f:
+        for row in csv.DictReader(f):
+            if base_name in row["Name"] and row["Type"] in ["Bot", "Deployable"]:
+                return row["Name"], row["Type"]
+    return base_name, "Equipment"
 
 
 __all__ = ["run", "force_database_update"]
