@@ -29,8 +29,7 @@ def full_page(sub_page: str) -> str:
 def parse_resources(field: str) -> List[str]:
     if field == "" or field == "-":
         return []
-    return sorted([r[:r.index("(") - 1] + ":" + r if r.endswith(")") else r for r in field.split(", ")],
-                  key=str.casefold)
+    return sorted([r for r in field.split(", ")], key=str.casefold)
 
 
 def make_asteroid_page(page: str, data: dict) -> None:
