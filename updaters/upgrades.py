@@ -74,7 +74,7 @@ def get_steps(entry: Dict[str, str]) -> List[Dict[str, str]]:
             i = 1
             while len(effect) > i:
                 unlock = search(r"^Unlock (?P<cat>\w+) - (?P<name>[\w\s]+)$", effect[i])
-                lines.append(f"Unlocks [[{unlock.group('cat')}/{unlock.group('name')}|{unlock.group('name')}]]")
+                lines.append(f"Unlocks {{{{{unlock.group('cat')} icon|{unlock.group('name')}}}}}")
                 i += 1
             ret[lvl]["effect"] = '<br />'.join(lines)
 
@@ -92,9 +92,9 @@ def make_upgrade_page(title: str, entry: Dict[str, str]) -> None:
         entry["Description"],
         entry["Affects"],
         ",".join([s["level"] for s in steps]),
-        ";".join([s["effect"] for s in steps]),
-        ";".join([s["credits"] for s in steps]),
-        ";".join([s["resources"] for s in steps])
+        ";;".join([s["effect"] for s in steps]),
+        ";;".join([s["credits"] for s in steps]),
+        ";;".join([s["resources"] for s in steps])
     ))
 
 
@@ -126,9 +126,9 @@ class UpgradeModifier(TemplateModifierBase):
 
         steps = get_steps(info)
         template.add("Levels", ",".join([s["level"] for s in steps]))
-        template.add("Effects", ";".join([s["effect"] for s in steps]))
-        template.add("Credit Costs", ";".join([s["credits"] for s in steps]))
-        template.add("Resource Costs", ";".join([s["resources"] for s in steps]))
+        template.add("Effects", ";;".join([s["effect"] for s in steps]))
+        template.add("Credit Costs", ";;".join([s["credits"] for s in steps]))
+        template.add("Resource Costs", ";;".join([s["resources"] for s in steps]))
 
 
 class UpgradeEnableModifier(TemplateModifierBase):

@@ -10,9 +10,9 @@ updaters_to_run = [
     # Page data update scripts
     #asteroid_updater,
     #equipment_updater,
-    resource_updater,
+    #resource_updater,
     #station_updater,
-    #upgrade_updater,
+    upgrade_updater,
 
     # Database update checkers
     #force_asteroid_update,
