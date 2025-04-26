@@ -63,6 +63,7 @@ class GenericResourceModifier(TemplateModifierBase):
 
         print("Updating Resource Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         template.add("Abbreviation", info["Abbreviation"])
         template.add("Gameplay Type", info["Gameplay Type"])
         template.add("Credit Value Class", info["Credit Value Class"])
@@ -83,6 +84,7 @@ class GemResourceModifier(TemplateModifierBase):
 
         print("Updating Gem Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"][:info["Name"].index("(") - 1])
         template.add("Abbreviation", info["Abbreviation"])
         template.add("Cash Value", info["$ Value"])
 
@@ -101,6 +103,7 @@ class ManufacturedResourceModifier(TemplateModifierBase):
 
         print("Updating Manufactured Resource Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         template.add("Abbreviation", info["Abbreviation"])
         template.add("Credit Value Class", info["Credit Value Class"])
         template.add("Cash Value", info["$ Value"])
@@ -120,6 +123,7 @@ class SalvageModifier(TemplateModifierBase):
 
         print("Updating Salvage Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         base_equipment, base_type = salvage_base_equipment(info["Name"])
         template.add("Equipment Name", base_equipment)
         template.add("Equipment Type", base_type)

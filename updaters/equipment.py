@@ -196,6 +196,7 @@ class SimpleEquipmentModifier(TemplateModifierBase):
 
         print("Updating Simple Equipment Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         template.add("Category", info["Type"])
         template.add("Station", info["Station Unlocked"])
         if info["Special Unlock"]:
@@ -224,6 +225,7 @@ class StructureEquipmentModifier(TemplateModifierBase):
 
         print("Updating Structure Equipment Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         template.add("Station", info["Station Unlocked"])
         if info["Special Unlock"]:
             if template.has("Price"):
@@ -252,6 +254,7 @@ class ToolEquipmentModifier(TemplateModifierBase):
 
         print("Updating Tool Equipment Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info[0]["Group"])
         template.add('tabs', ','.join([entry['Variant'] for entry in info]))
         template.add('Stations', ';;'.join([entry['Station Unlocked'] for entry in info]))
         template.add('Special Unlocks', ';;'.join([entry['Special Unlock'] for entry in info]))
@@ -275,6 +278,7 @@ class ModificationEquipmentModifier(TemplateModifierBase):
         # change this when there are multiple pieces of equipment in a modification group
         print("Updating Modification Equipment Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info[0]["Group"])
         template.add("Station", info[0]["Station Unlocked"])
         template.add("Price", info[0]["Price"])
         template.add("Short Description", info[0]["Short Description"])
@@ -296,6 +300,7 @@ class MachineEquipmentModifier(TemplateModifierBase):
         # change this when there are multiple pieces of equipment in a modification group
         print("Updating Manufacturing Equipment Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         template.add("Station", info["Station Unlocked"])
         if info["Special Unlock"]:
             if template.has("Price"):

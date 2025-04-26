@@ -12,6 +12,7 @@ upgrade_template = """{{{{Upgrade Infobox
 |Name={}
 |Description={}
 |Affects={}
+|Target={}
 |Levels={}
 |Effects={}
 |Credit Costs={}
@@ -22,6 +23,7 @@ upgrade_template = """{{{{Upgrade Infobox
 upgrade_unlock_template = """{{{{Upgrade Infobox/Unlock
 |Name={}
 |Description={}
+|Target={}
 |Credits={}
 |Resources={}
 }}}}
@@ -36,6 +38,10 @@ data_to_update = {}
 
 def full_page(sub_page: str) -> str:
     return prefix + sub_page
+
+
+def upgrade_target(name: str) -> str:
+    return "Shuttle" if name.split(' ')[0] == "Shuttle" else "Freighter"
 
 
 def get_resources(entry: Dict[str, str], lvl: int) -> str:
@@ -91,6 +97,7 @@ def make_upgrade_page(title: str, entry: Dict[str, str]) -> None:
         entry["Name"],
         entry["Description"],
         entry["Affects"],
+        upgrade_target(entry["Name"]),
         ",".join([s["level"] for s in steps]),
         ";;".join([s["effect"] for s in steps]),
         ";;".join([s["credits"] for s in steps]),
@@ -102,6 +109,7 @@ def make_upgrade_enable_page(title: str, entry: Dict[str, str]) -> None:
     create_page(title, upgrade_unlock_template.format(
         entry["Name"],
         entry["Description"],
+        upgrade_target(entry["Name"]),
         entry["Lvl 1 Credits"],
         get_resources(entry, 1)
     ))
@@ -121,8 +129,10 @@ class UpgradeModifier(TemplateModifierBase):
 
         print("Updating Upgrade Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         template.add("Description", info["Description"])
         template.add("Affects", info["Affects"])
+        template.add("Target", upgrade_target(info["Name"]))
 
         steps = get_steps(info)
         template.add("Levels", ",".join([s["level"] for s in steps]))
@@ -145,7 +155,9 @@ class UpgradeEnableModifier(TemplateModifierBase):
 
         print("Updating Enable Upgrade Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         template.add("Description", info["Description"])
+        template.add("Target", upgrade_target(info["Name"]))
         template.add("Credits", info["Lvl 1 Credits"])
         template.add("Resources", get_resources(info, 1))
 

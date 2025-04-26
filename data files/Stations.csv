@@ -1,9 +1,9 @@
-Name,Depth (kkm),Contracts,Max Reputation
-Cube Corp,0,11,10
-Medusa Minerals,998,10,10
-TW Gems,2002,8,8
-Black Tidal,,,
-Ceres Vesta,,,
-Noblecore AG,,,
-Rockwell,,,
-Horizon Ventures,,,
+Name,Short Name,Depth (kkm),Refuel Cost,Contracts,Max Reputation
+Cube Corp,CC,0,20,11,10
+Medusa Minerals,MM,998,40,10,10
+TW Gems,TW,2002,66.5,8,8
+Black Tidal,BT,,,7,7
+Ceres Vesta,CV,,,6,6
+Noblecore AG,NC,,,6,6
+Rockwell,RW,,,7,7
+Horizon Ventures,HV,,,0,0

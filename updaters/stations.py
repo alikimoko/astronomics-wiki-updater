@@ -10,6 +10,7 @@ prefix = "Station/"
 station_template = """{{{{Station Infobox
 |Station={}
 |Depth={}
+|Refuel Cost={}
 |Contracts={}
 }}}}
 """
@@ -55,6 +56,7 @@ def make_station_page(page: str, data: dict) -> None:
     WIKI_TEXT = station_template.format(
         data["Name"],
         data["Depth (kkm)"],
+        data["Refuel Cost"],
         construct_contract_list(data["Contracts"])
     )
     create_page(page, WIKI_TEXT)
@@ -74,7 +76,9 @@ class StationModifier(TemplateModifierBase):
 
         print("Updating Station Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
         template.add("Depth", info["Depth (kkm)"])
+        template.add("Refuel Cost", info["Refuel Cost"])
         template.add("Contracts", construct_contract_list(info["Contracts"]))
 
 

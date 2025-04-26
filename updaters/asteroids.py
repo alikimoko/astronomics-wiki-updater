@@ -61,6 +61,7 @@ class AsteroidModifier(TemplateModifierBase):
 
         print("Updating Asteroid Infobox on " + self.current_page.page_title)
         info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["In-Game ID"])
         template.add("Region", info["Region"])
         template.add("Composition", info["Composition"])
         template.add("Surface Resources", ",".join(parse_resources(info["Surface resource"])))
