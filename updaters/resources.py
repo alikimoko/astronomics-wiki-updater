@@ -31,10 +31,11 @@ manufactured_template = """{{{{Resource Infobox/Manufactured
 }}}}
 """
 
-salvage_template = """{{{{Resource Infobox/Salvage
+salvage_template = """{{{{Salvage Infobox
 |Name={}
 |Equipment Name={}
 |Equipment Type={}
+|Repair Cost={}
 }}}}
 The remains of a destroyed [[{}/{}|{}]]. You can collect it and repair it at the station for a reduced cost.
 """
@@ -127,9 +128,12 @@ class SalvageModifier(TemplateModifierBase):
         base_equipment, base_type = salvage_base_equipment(info["Name"])
         template.add("Equipment Name", base_equipment)
         template.add("Equipment Type", base_type)
+        template.add("Repair Cost", info["Repair Cost"])
 
 
 def full_page(sub_page: str) -> str:
+    if "(Salvage)" in sub_page:
+        return "Salvage/" + sub_page
     return prefix + sub_page
 
 
@@ -289,6 +293,7 @@ def salvage_resource(data: dict):
             data["Name"],
             base_equipment,
             equipment_type,
+            data["Repair Cost"],
             equipment_type,
             base_equipment,
             base_equipment,
