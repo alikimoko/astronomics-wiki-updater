@@ -133,7 +133,7 @@ class SalvageModifier(TemplateModifierBase):
 
 def full_page(sub_page: str) -> str:
     if "(Salvage)" in sub_page:
-        return "Salvage/" + sub_page
+        return "Salvage/" + sub_page[:sub_page.index("(") - 1]
     return prefix + sub_page
 
 
