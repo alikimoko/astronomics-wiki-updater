@@ -80,9 +80,9 @@ def get_steps(entry: Dict[str, str]) -> List[Dict[str, str]]:
             i = 1
             while len(effect) > i:
                 unlock = search(r"^Unlock (?P<cat>\w+) - (?P<name>[\w\s]+)$", effect[i])
-                lines.append(f"Unlocks {{{{{unlock.group('cat')} icon|{unlock.group('name')}}}}}")
+                lines.append(f"{unlock.group('cat')}:{unlock.group('name')}")
                 i += 1
-            ret[lvl]["effect"] = '<br />'.join(lines)
+            ret[lvl]["effect"] = ';'.join(lines)
 
         # get the required resources
         ret[lvl]["resources"] = get_resources(entry, lvl)

@@ -11,7 +11,7 @@ Manufacturing,The manufacturing and production capabilities of the freighter.,Nu
 800 Cobalt
 3000 Iron",1800,Cobalt,800,Iron,3000,-,,-,,2230,"2 Slots
 Unlock Manufacturing - Carbonator",TBA,,-,,-,,-,,-,,0,4 Slots,TBA,,-,,-,,-,,-,,0,7 Slots
-Navigation,The Navigation system makes it poossible to plot a safe path for Hyperjumping to moving objects.,Maximum jump range to asteroids and empty space,300 KKM,"760 Credits
+Navigation,The Navigation system makes it possible to plot a safe path for Hyperjumping to moving objects.,Maximum jump range to asteroids and empty space,300 KKM,"760 Credits
 500 Rutile",760,Rutile,500,-,,-,,-,,935,350 KKM,"1900 Credits
 500 Chromite
 1000 Fiber Optic Strands",1900,Chromite,500,Fiber Optic Strands,1000,-,,-,,2575,450 KKM,TBA,,-,,-,,-,,-,,0,600 KKM
@@ -20,7 +20,7 @@ Scanner,The scanner allows you to detect asteroid types and informs about the re
 500 Silica",540,Nickel,500,Silica,500,-,,-,,665,300 KKM,"1800 Credits
 750 Magnesite
 750 Silver",1800,Magnesite,750,Silver,750,-,,-,,2437.5,600 KKM,TBA,,-,,-,,-,,-,,0,900 KKM
-Shuttle Forge,Add a forger to your shuttle that produces molten iron that can be used for construction of infrastructure on the asteroid surface.,Molten iron capacity,Unavailable,"450 Credits
+Shuttle Forge,Add a forge to your shuttle that produces molten iron that can be used for construction of infrastructure on the asteroid surface.,Molten iron capacity,Unavailable,"450 Credits
 300 Iron",450,Iron,300,-,,-,,-,,465,"60
 Unlock Structure - Standard Crane","2520 Credits
 1500 Gem Dust
