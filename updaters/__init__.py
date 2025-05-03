@@ -8,14 +8,14 @@ from .upgrades import run as upgrade_updater, force_database_update as force_upg
 # Run all update scripts in
 updaters_to_run = [
     # Page data update scripts
-    #asteroid_updater,
+    asteroid_updater,
     #equipment_updater,
     #resource_updater,
     #station_updater,
-    upgrade_updater,
+    #upgrade_updater,
 
     # Database update checkers
-    #force_asteroid_update,
+    force_asteroid_update,
     #force_equipment_update,
     #force_resource_update,
     #force_station_update,

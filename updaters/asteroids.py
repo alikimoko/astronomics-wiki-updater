@@ -11,6 +11,7 @@ asteroid_template = """{{{{Asteroid Infobox
 |Name={}
 |Region={}
 |Composition={}
+|Pirates={}
 |Surface Resources={}
 |Deposit Resources={}
 |Liquid Resources={}
@@ -38,6 +39,7 @@ def make_asteroid_page(page: str, data: dict) -> None:
         data["In-Game ID"],
         data["Region"],
         data["Composition"],
+        data["Pirate warning"],
         ",".join(parse_resources(data["Surface resource"])),
         ",".join(sorted(parse_resources(data["Underground deposit (Common)"])
                  + parse_resources(data["Underground deposit (Rare)"]), key=str.casefold)),
@@ -64,6 +66,7 @@ class AsteroidModifier(TemplateModifierBase):
         template.add("Name", info["In-Game ID"])
         template.add("Region", info["Region"])
         template.add("Composition", info["Composition"])
+        template.add("Pirates", info["Pirate warning"])
         template.add("Surface Resources", ",".join(parse_resources(info["Surface resource"])))
         template.add("Deposit Resources", ",".join(sorted(parse_resources(info["Underground deposit (Common)"])
                                                           + parse_resources(info["Underground deposit (Rare)"]),
@@ -76,7 +79,7 @@ def run():
     with open("data files/Asteroid resources.csv") as f:
         asteroid_data = {}
         for row in csv.DictReader(f):
-            if row["In-Game ID"] == "" or row["Composition"] == "Station":
+            if row["In-Game ID"] == "" or row["Internal id"] == "" or row["Composition"] == "Station":
                 continue
             page = full_page(row["In-Game ID"])
             asteroid_data[page] = row
