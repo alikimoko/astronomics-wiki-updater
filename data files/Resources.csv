@@ -1,6 +1,4 @@
-,* Name must be sorted in alphabetical order for the rest of the sheets to work propperly.,,,,,,
-,** Abbreviation used by the data/info view. Manufactured items to not have an abbreviation.,,,,,,
-Name *,Abbreviation **,Credit Value Class,Gameplay Type,$ Value,Credit Value,Repair Cost,Found at
+Name,Abbreviation,Credit Value Class,Gameplay Type,$ Value,Credit Value,Repair Cost,Found at
 -,,-,Unknown,0,0,,
 Amazonite,AMZ,Rare,Mineral,2300,0.5,,"MM3, TW2, TW3"
 Battery (Salvage),,Undesirable,Salvage,250,0.05,50,Wrecks
