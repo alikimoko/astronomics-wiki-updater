@@ -5,74 +5,6 @@ from .util import create_page, page_exists, run_template_modifier, database_upda
 from mwcleric import TemplateModifierBase
 from mwparserfromhell.nodes import Template
 
-simple_template = """{{{{Equipment Infobox
-|Name={}
-|Category={}
-|Station={}
-|{}={}
-|Short Description={}
-|In Game Description={}
-}}}}
-{}
-It can be purchased at the {} console in the {} tab
-"""
-
-structure_template = """{{{{Equipment Infobox/Structure
-|Name={}
-|Station={}
-|{}={}
-|Build Cost={}
-|Short Description={}
-|In Game Description={}
-}}}}
-{}
-It can be purchased at the {} console in the {} tab
-"""
-
-tool_template = """{{{{Equipment Infobox/Tool
-|Name={}
-|tabs={}
-|Stations={}
-|Special Unlocks={}
-|Prices={}
-|Short Descriptions={}
-|In Game Descriptions={}
-}}}}
-{}
-It can be purchased at the {} console in the {} tab
-"""
-
-modification_template = """{{{{Equipment Infobox/Modification
-|Name={}
-|Station={}
-|Price={}
-|Short Description={}
-|In Game Description={}
-}}}}
-{}
-It can be purchased at the {} console in the {} tab
-"""
-
-manufacturing_template = """{{{{Equipment Infobox/Manufacturing
-|Name={}
-|Station={}
-|{}={}
-|Short Description={}
-|In Game Description={}
-|Recipes={}
-}}}}
-{}
-It can be purchased at the {} console in the {} tab
-"""
-
-manufacturing_recipe_template = """{{{{Equipment Infobox/Manufacturing/Recipe
-|Recipe ID={}
-|Machine={}
-|Processing Time={}
-|Ingredients={}
-|Products={}
-}}}}"""
-
 pages_to_update = {
     "simple": [],
     "structure": [],
@@ -94,59 +26,83 @@ def construct_page_title(entry: Dict[str, str]) -> str:
 
 
 def make_simple_page(title: str, entry: Dict[str, str]) -> None:
-    args = [entry["Name"], entry["Type"], entry["Station Unlocked"]]\
-           + (["Special Unlock", entry["Special Unlock"]] if entry["Special Unlock"] else ["Price", entry["Price"]])\
-           + [entry["Short Description"], entry["In Game Description"], entry["Description"],
-              entry["Console"], entry["Tab"]]
-    create_page(title, simple_template.format(*args))
+    create_page(title, f"""{{{{Stub}}}}
+{{{{Beta content}}}}
+{{{{Equipment Infobox
+|Name={entry["Name"]}
+|Category={entry["Type"]}
+|Station={entry["Station Unlocked"]}
+|{"Special Unlock=" + entry["Special Unlock"] if entry["Special Unlock"] else "Price=" + entry["Price"]}
+|Short Description={entry["Short Description"]}
+|In Game Description={entry["In Game Description"]}
+}}}}
+
+{entry["Description"]} It can be purchased at the {entry["Console"]} console in the {entry["Tab"]} tab.
+
+{{{{Main site nav}}}}
+""")
 
 
 def make_structure_page(title: str, entry: Dict[str, str]) -> None:
-    args = [entry["Name"], entry["Station Unlocked"]]\
-           + (["Special Unlock", entry["Special Unlock"]] if entry["Special Unlock"] else ["Price", entry["Price"]])\
-           + [entry["Build Cost"], entry["Short Description"], entry["In Game Description"], entry["Description"],
-              entry["Console"], entry["Tab"]]
-    create_page(title, structure_template.format(*args))
+    create_page(title, f"""{{{{Stub}}}}
+{{{{Beta content}}}}
+{{{{Equipment Infobox/Structure
+|Name={entry["Name"]}
+|Station={entry["Station Unlocked"]}
+|{"Special Unlock=" + entry["Special Unlock"] if entry["Special Unlock"] else "Price=" + entry["Price"]}
+|Build Cost={entry["Build Cost"]}
+|Short Description={entry["Short Description"]}
+|In Game Description={entry["In Game Description"]}
+}}}}
+
+{entry["Description"]} It can be purchased at the {entry["Console"]} console in the {entry["Tab"]} tab.
+
+{{{{Main site nav}}}}
+""")
 
 
 def make_tool_page(title: str, entries: List[Dict[str, str]]) -> None:
-    args: List[str] = [
-        entries[0]['Group'],
-        ','.join([entry['Variant'] for entry in entries]),
-        ';;'.join([entry['Station Unlocked'] for entry in entries]),
-        ';;'.join([entry['Special Unlock'] for entry in entries]),
-        ';;'.join([entry['Price'] for entry in entries]),
-        ';;'.join([entry['Short Description'] for entry in entries]),
-        ';;'.join([entry['In Game Description'] for entry in entries]),
-        '<br />'.join([entry['Variant'] + ': ' + entry['Description'] for entry in entries]),
-        entries[0]['Console'],
-        entries[0]['Tab']
-    ]
-    create_page(title, tool_template.format(*args))
+    create_page(title, f"""{{{{Cleanup}}}}
+{{{{Beta content}}}}
+{{{{Equipment Infobox/Tool
+|Name={entries[0]['Group']}
+|tabs={','.join([entry['Variant'] for entry in entries])}
+|Stations={';;'.join([entry['Station Unlocked'] for entry in entries])}
+|Special Unlocks={';;'.join([entry['Special Unlock'] for entry in entries])}
+|Prices={';;'.join([entry['Price'] for entry in entries])}
+|Short Descriptions={';;'.join([entry['Short Description'] for entry in entries])}
+|In Game Descriptions={';;'.join([entry['In Game Description'] for entry in entries])}
+}}}}
+
+{'<br />'.join([entry['Variant'] + ': ' + entry['Description'] for entry in entries])}
+
+It can be purchased at the {entries[0]['Console']} console in the {entries[0]['Tab']} tab.
+
+{{{{Main site nav}}}}
+""")
 
 
 def make_modification_page(title: str, entries: List[Dict[str, str]]) -> None:
     # This should be changed when there are multiple modifications for the same group
-    args = [
-        entries[0]["Group"],
-        entries[0]["Station Unlocked"],
-        entries[0]["Price"],
-        entries[0]["Short Description"],
-        entries[0]["In Game Description"],
-        entries[0]["Description"],
-        entries[0]["Console"],
-        entries[0]["Tab"]
-    ]
-    create_page(title, modification_template.format(*args))
+    create_page(title, f"""{{{{Stub}}}}
+{{{{Beta content}}}}
+{{{{Equipment Infobox/Modification
+|Name={entries[0]["Group"]}
+|Station={entries[0]["Station Unlocked"]}
+|Price={entries[0]["Price"]}
+|Short Description={entries[0]["Short Description"]}
+|In Game Description={entries[0]["In Game Description"]}
+}}}}
+
+{entries[0]["Description"]}
+
+It can be purchased at the {entries[0]['Console']} console in the {entries[0]['Tab']} tab.
+
+{{{{Main site nav}}}}
+""")
 
 
 def make_recipe(recipe: Dict[str, str]) -> str:
-    args = [
-        recipe["Identifier"],
-        recipe["Machine"],
-        recipe["Processing time"],
-    ]
-
     ingredients = []
     i = 1
     while recipe.get(f"Input {i} Name", None):
@@ -154,7 +110,6 @@ def make_recipe(recipe: Dict[str, str]) -> str:
             break
         ingredients.append(f"{recipe[f'Input {i} Name']}:{recipe[f'Input {i} Quantity']}")
         i += 1
-    args.append(','.join(ingredients))
 
     products = []
     i = 1
@@ -163,23 +118,35 @@ def make_recipe(recipe: Dict[str, str]) -> str:
             break
         products.append(f"{recipe[f'Product {i} Name']}:{recipe[f'Product {i} Quantity']}")
         i += 1
-    args.append(','.join(products))
 
-    return manufacturing_recipe_template.format(*args)
+    return f"""{{{{Equipment Infobox/Manufacturing/Recipe
+  |Recipe ID={recipe["Identifier"]}
+  |Machine={recipe["Machine"]}
+  |Processing Time={recipe["Processing time"]}
+  |Ingredients={','.join(ingredients)}
+  |Products={','.join(products)}
+}}}}"""
 
 
 def make_machine_page(title: str, entry: Dict[str, Union[str, List[Dict[str, str]]]]):
-    args = [entry["Name"], entry["Station Unlocked"]] \
-           + (["Special Unlock", entry["Special Unlock"]] if entry["Special Unlock"] else ["Price", entry["Price"]]) \
-           + [
-                entry["Short Description"],
-                entry["In Game Description"],
-                ';;'.join([make_recipe(r) for r in entry["Recipes"]]),
-                entry["Description"],
-                entry["Console"],
-                entry["Tab"]
-           ]
-    create_page(title, manufacturing_template.format(*args))
+    create_page(title, f"""{{{{Cleanup}}}}
+{{{{Beta content}}}}
+{{{{Equipment Infobox/Manufacturing
+|Name={entry["Name"]}
+|Station={entry["Station Unlocked"]}
+|{"Special Unlock=" + entry["Special Unlock"] if entry["Special Unlock"] else "Price=" + entry["Price"]}
+|Short Description={entry["Short Description"]}
+|In Game Description={entry["In Game Description"]}
+|Recipes={';;'.join([make_recipe(r) for r in entry["Recipes"]])}
+}}}}
+
+{entry["Description"]} It can be purchased at the {entry["Console"]} console in the {entry["Tab"]} tab.
+
+== Recipes ==
+{{{{Machine recipes table|{entry["Name"]}}}}}
+
+{{{{Main site nav}}}}
+""")
 
 
 class SimpleEquipmentModifier(TemplateModifierBase):
@@ -354,7 +321,7 @@ def run():
         page = "Manufacturing/" + entry["Machine"]
         pages["machine"][page]["Recipes"].append(entry)
 
-    # Make now pages or mark for update
+    # Make new pages or mark for update
     for page, data in pages["simple"].items():
         if page_exists(page):
             pages_to_update["simple"].append(page)

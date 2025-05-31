@@ -7,24 +7,6 @@ from mwparserfromhell.nodes import Template
 
 prefix = "Station/"
 
-station_template = """{{{{Station Infobox
-|Station={}
-|Depth={}
-|Refuel Cost={}
-|Contracts={}
-}}}}
-"""
-
-contract_template = """{{{{Station Infobox/Contract
-  |Station={}
-  |Contract Number={}
-  |Title={}
-  |Internal ID={}
-  |Requirements={}
-  |Reward={}
-  |Notes={}
-}}}}"""
-
 pages_to_update = []
 data_to_update = {}
 
@@ -34,32 +16,59 @@ def full_page(sub_page: str) -> str:
 
 
 def construct_contract_list(contracts: List[dict]) -> str:
-    # Table headers: Station,Internal ID,Title,Required Quantity,Reward,Notes
+    # Table headers:
+    # Station
+    # Internal ID
+    # Title
+    # Required Quantity
+    # Reward
+    # Notes
     wiki_text = []
     for i in range(len(contracts)):
         contract = contracts[i]
-        wiki_text.append(contract_template.format(
-            contract["Station"],
-            i + 1,
-            contract["Title"],
-            contract["Internal ID"],
-            contract["Required Quantity"],
-            contract["Reward"],
-            contract["Notes"]
-        ))
+        wiki_text.append(f"""{{{{Station Infobox/Contract
+  |Station={contract["Station"]}
+  |Contract Number={i + 1}
+  |Title={contract["Title"]}
+  |Internal ID={contract["Internal ID"]}
+  |Requirements={contract["Required Quantity"]}
+  |Reward={contract["Reward"]}
+  |Notes={contract["Notes"]}
+}}}}""")
 
     return "".join(wiki_text)
 
 
 def make_station_page(page: str, data: dict) -> None:
-    # Table headers: Name,Depth (kkm),Contracts,Max Reputation
-    WIKI_TEXT = station_template.format(
-        data["Name"],
-        data["Depth (kkm)"],
-        data["Refuel Cost"],
-        construct_contract_list(data["Contracts"])
-    )
-    create_page(page, WIKI_TEXT)
+    # Table headers:
+    # Name
+    # Depth (kkm)
+    # Contracts
+    # Max Reputation
+    create_page(page, f"""{{{{Stub}}}}
+{{{{Beta content}}}}
+{{{{Station Infobox
+|Station={data["Name"]}
+|Depth={data["Depth (kkm)"]}
+|Refuel Cost={data["Refuel Cost"]}
+|Contracts={construct_contract_list(data["Contracts"])}
+}}}}
+
+== Asteroids ==
+{{{{Asteroid table|Region|{data["Name"]}}}}}
+
+== Contracts ==
+{{{{For|a full list of contracts|Contracts}}}}
+{{{{Contracts table|{data["Name"]}}}}}
+
+== Unlocked equipment ==
+{{{{Station unlocks table|{data["Name"]}}}}}
+
+== Available upgrades ==
+The following new upgrades can be unlocked using the resources you can find in this region:
+
+{{{{Main site nav}}}}
+""")
 
 
 class StationModifier(TemplateModifierBase):

@@ -8,27 +8,6 @@ from mwparserfromhell.nodes import Template
 
 prefix = "Upgrade/"
 
-upgrade_template = """{{{{Upgrade Infobox
-|Name={}
-|Description={}
-|Affects={}
-|Target={}
-|Levels={}
-|Effects={}
-|Credit Costs={}
-|Resource Costs={}
-}}}}
-"""
-
-upgrade_unlock_template = """{{{{Upgrade Infobox/Unlock
-|Name={}
-|Description={}
-|Target={}
-|Credits={}
-|Resources={}
-}}}}
-"""
-
 pages_to_update = {
     "regular": [],
     "enable": [],
@@ -93,26 +72,41 @@ def get_steps(entry: Dict[str, str]) -> List[Dict[str, str]]:
 
 def make_upgrade_page(title: str, entry: Dict[str, str]) -> None:
     steps = get_steps(entry)
-    create_page(title, upgrade_template.format(
-        entry["Name"],
-        entry["Description"],
-        entry["Affects"],
-        upgrade_target(entry["Name"]),
-        ",".join([s["level"] for s in steps]),
-        ";;".join([s["effect"] for s in steps]),
-        ";;".join([s["credits"] for s in steps]),
-        ";;".join([s["resources"] for s in steps])
-    ))
+    create_page(title, f"""{{{{Stub}}}}
+{{{{Beta Content}}}}
+{{{{Upgrade Infobox
+|Name={entry["Name"]}
+|Description={entry["Description"]}
+|Affects={entry["Affects"]}
+|Target={upgrade_target(entry["Name"])}
+|Levels={",".join([s["level"] for s in steps])}
+|Effects={";;".join([s["effect"] for s in steps])}
+|Credit Costs={";;".join([s["credits"] for s in steps])}
+|Resource Costs={";;".join([s["resources"] for s in steps])}
+}}}}
+
+== Station Availability ==
+The required resources limit when you can unlock upgrades. For {entry["Name"]} these are:
+
+{{{{Main site nav}}}}
+""")
 
 
 def make_upgrade_enable_page(title: str, entry: Dict[str, str]) -> None:
-    create_page(title, upgrade_unlock_template.format(
-        entry["Name"],
-        entry["Description"],
-        upgrade_target(entry["Name"]),
-        entry["Lvl 1 Credits"],
-        get_resources(entry, 1)
-    ))
+    create_page(title, f"""{{{{Stub}}}}
+{{{{Beta content}}}}
+{{{{Upgrade Infobox/Unlock
+|Name={entry["Name"]}
+|Description={entry["Description"]}
+|Target={upgrade_target(entry["Name"])}
+|Credits={entry["Lvl 1 Credits"]}
+|Resources={get_resources(entry, 1)}
+}}}}
+
+The {entry["Name"]} is a one time upgrade.
+
+{{{{Main site nav}}}}
+""")
 
 
 class UpgradeModifier(TemplateModifierBase):

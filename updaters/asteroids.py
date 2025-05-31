@@ -1,23 +1,11 @@
 import csv
 from typing import List
 
-from.util import create_page, page_exists, run_template_modifier, database_update
+from .util import create_page, page_exists, run_template_modifier, database_update
 from mwcleric import TemplateModifierBase
 from mwparserfromhell.nodes import Template
 
 prefix = "Asteroid/"
-
-asteroid_template = """{{{{Asteroid Infobox
-|Name={}
-|Region={}
-|Composition={}
-|Pirates={}
-|Surface Resources={}
-|Deposit Resources={}
-|Liquid Resources={}
-|Gas Resources={}
-}}}}
-"""
 
 pages_to_update = []
 data_to_update = {}
@@ -34,19 +22,33 @@ def parse_resources(field: str) -> List[str]:
 
 
 def make_asteroid_page(page: str, data: dict) -> None:
-    # Table headers: Name,Depth (kkm),Contracts,Max Reputation
-    WIKI_TEXT = asteroid_template.format(
-        data["In-Game ID"],
-        data["Region"],
-        data["Composition"],
-        data["Pirate warning"],
-        ",".join(parse_resources(data["Surface resource"])),
-        ",".join(sorted(parse_resources(data["Underground deposit (Common)"])
-                 + parse_resources(data["Underground deposit (Rare)"]), key=str.casefold)),
-        ",".join(parse_resources(data["Liquids"])),
-        ",".join(parse_resources(data["Gasses"])),
-    )
-    create_page(page, WIKI_TEXT)
+    # Table headers:
+    # Internal id
+    # In-Game ID
+    # Composition
+    # Region
+    # Pirate warning
+    # Surface resource
+    # Underground deposit (Common)
+    # Underground deposit (Rare)
+    # Liquids
+    # Gasses
+    create_page(page, f"""{{{{Beta content}}}}
+{{{{Asteroid Infobox
+|Name={data["In-Game ID"]}
+|Region={data["Region"]}
+|Composition={data["Composition"]}
+|Pirates={data["Pirate warning"]}
+|Surface Resources={",".join(parse_resources(data["Surface resource"]))}
+|Deposit Resources={",".join(sorted(parse_resources(data["Underground deposit (Common)"])
+                                    + parse_resources(data["Underground deposit (Rare)"]),
+                                    key=str.casefold))}
+|Liquid Resources={",".join(parse_resources(data["Liquids"]))}
+|Gas Resources={",".join(parse_resources(data["Gasses"]))}
+}}}}
+
+{{{{Main site nav}}}}
+""")
 
 
 class AsteroidModifier(TemplateModifierBase):

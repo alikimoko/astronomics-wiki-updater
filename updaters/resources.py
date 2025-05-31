@@ -7,39 +7,6 @@ from mwparserfromhell.nodes import Template
 
 prefix = "Resource/"
 
-generic_template = """{{{{Resource Infobox
-|Name={}
-|Abbreviation={}
-|Gameplay Type={}
-|Credit Value Class={}
-|Cash Value={}
-|Value Modifier={}
-}}}}"""
-
-gem_template = """{{{{Resource Infobox/Gem
-|Name={}
-|Abbreviation={}
-|Cash Value={}
-}}}}"""
-
-manufactured_template = """{{{{Resource Infobox/Manufactured
-|Name={}
-|Abbreviation={}
-|Credit Value Class={}
-|Cash Value={}
-|Value Modifier={}
-}}}}
-"""
-
-salvage_template = """{{{{Salvage Infobox
-|Name={}
-|Equipment Name={}
-|Equipment Type={}
-|Repair Cost={}
-}}}}
-The remains of a destroyed [[{}/{}|{}]]. You can collect it and repair it at the station for a reduced cost.
-"""
-
 pages_to_update = {
     "generic": [],
     "gem": [],
@@ -223,20 +190,20 @@ def generic_resource(data: dict):
         data_to_update[page] = data
     else:
         # Create new page
-        WIKITEXT = generic_template.format(
-            data["Name"],
-            data["Abbreviation"],
-            data["Gameplay Type"],
-            data["Credit Value Class"],
-            data["$ Value"],
-            ""
-        )
-        WIKITEXT += "\n{} can be found on {}".format(
-            data["Name"],
-            ", ".join(["[[Asteroid/{}|{}]]".format(s, s) for s in data["Found at"].split(", ")])
-        )
+        create_page(page, f"""{{{{Beta content}}}}
+{{{{Resource Infobox
+|Name={data["Name"]}
+|Abbreviation={data["Abbreviation"]}
+|Gameplay Type={data["Gameplay Type"]}
+|Credit Value Class={data["Credit Value Class"]}
+|Cash Value={data["$ Value"]}
+|Value Modifier=
+}}}}
 
-        create_page(page, WIKITEXT)
+{data["Name"]} can be found on {", ".join([f"{{{{Asteroid icon|{s}}}}}" for s in data["Found at"].split(", ")])}
+
+{{{{Main site nav}}}}
+""")
 
 
 def gem_resource(data: dict):
@@ -248,17 +215,17 @@ def gem_resource(data: dict):
         data_to_update[page] = data
     else:
         # Create new page
-        WIKITEXT = gem_template.format(
-            gem_name,
-            data["Abbreviation"],
-            data["$ Value"]
-        )
-        WIKITEXT += "\n{} can be found on {}".format(
-            gem_name,
-            ", ".join(["[[Asteroid/{}|{}]]".format(s, s) for s in data["Found at"].split(", ")])
-        )
 
-        create_page(page, WIKITEXT)
+        create_page(page, f"""{{{{Beta content}}}}
+{{{{Resource Infobox/Gem
+|Name={gem_name}
+|Abbreviation={data["Abbreviation"]}
+|Cash Value={data["$ Value"]}
+
+{gem_name} can be found on {", ".join([f"{{{{Asteroid icon|{s}}}}}" for s in data["Found at"].split(", ")])}
+
+{{{{Main site nav}}}}
+}}}}""")
 
 
 def manufactured_resource(data: dict):
@@ -269,15 +236,17 @@ def manufactured_resource(data: dict):
         data_to_update[page] = data
     else:
         # Create new page
-        WIKITEXT = manufactured_template.format(
-            data["Name"],
-            data["Abbreviation"],
-            data["Credit Value Class"],
-            data["$ Value"],
-            ""
-        )
+        create_page(page, f"""{{{{Beta content}}}}
+{{{{Resource Infobox/Manufactured
+|Name={data["Name"]}
+|Abbreviation={data["Abbreviation"]}
+|Credit Value Class={data["Credit Value Class"]}
+|Cash Value={data["$ Value"]}
+|Value Modifier=
+}}}}
 
-        create_page(page, WIKITEXT)
+{{{{Main site nav}}}}
+""")
 
 
 def salvage_resource(data: dict):
@@ -289,15 +258,18 @@ def salvage_resource(data: dict):
     else:
         # Create new page
         base_equipment, equipment_type = salvage_base_equipment(data["Name"])
-        create_page(page, salvage_template.format(
-            data["Name"],
-            base_equipment,
-            equipment_type,
-            data["Repair Cost"],
-            equipment_type,
-            base_equipment,
-            base_equipment,
-        ))
+        create_page(page, f"""{{{{Beta content}}}}
+{{{{Salvage Infobox
+|Name={data["Name"]}
+|Equipment Name={base_equipment}
+|Equipment Type={equipment_type}
+|Repair Cost={data["Repair Cost"]}
+}}}}
+
+The remains of a destroyed {{{{{equipment_type} icon|{base_equipment}}}}}. You can collect it and repair it at the station for a reduced cost.
+
+{{{{Main site nav}}}}
+""")
 
 
 def salvage_base_equipment(name: str) -> Tuple[str, str]:
