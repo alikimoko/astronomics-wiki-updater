@@ -6,11 +6,15 @@ Fuel Capacity,,Number of jumps in a full tank,2 Jumps,"500 Credits
 2000 Steel Rod",2450,Resin,300,Steel Rod,2000,-,,-,,3210,4 Jumps,TBA,,-,,-,,-,,-,,0,5 Jumps
 Storage Capacity,,Storage capacity of the freighter,5000 kg,"1250 Credits
 900 Cobalt
-1500 Nickel",1250,Cobalt,900,Nickel,1500,-,,-,,1865,7500 kg,TBA,,-,,-,,-,,-,,0,10000 kg,TBA,,-,,-,,-,,-,,0,12500 kg
+1500 Nickel",1250,Cobalt,900,Nickel,1500,-,,-,,1865,7500 kg,"2600 Credits
+1000 Brine
+500 Copper Wire",2600,Brine,1000,Copper Wire,500,-,,-,,3275,10000 kg,TBA,,-,,-,,-,,-,,0,12500 kg
 Manufacturing,The manufacturing and production capabilities of the freighter.,Number of manufacturing bay machine slots,Unavailable,"1800 Credits
 800 Cobalt
 3000 Iron",1800,Cobalt,800,Iron,3000,-,,-,,2230,"2 Slots
-Unlock Manufacturing - Carbonator",TBA,,-,,-,,-,,-,,0,4 Slots,TBA,,-,,-,,-,,-,,0,7 Slots
+Unlock Manufacturing - Carbonator","1800 Credits
+300 Graphite
+750 Lodestone",1800,Graphite,300,Lodestone,750,-,,-,,2167.5,4 Slots,TBA,,-,,-,,-,,-,,0,7 Slots
 Navigation,The Navigation system makes it possible to plot a safe path for Hyperjumping to moving objects.,Maximum jump range to asteroids and empty space,300 KKM,"760 Credits
 500 Rutile",760,Rutile,500,-,,-,,-,,935,350 KKM,"1900 Credits
 500 Chromite
@@ -29,7 +33,11 @@ Unlock Structure - Standard Crane","2520 Credits
 Shuttle Equipment,The equipment carrying capacity of the shuttle that makes space for Workerbots and Mining Turrets to the asteroid surface,Available equipment slots,4 Slots,"1250 Credits
 1000 Galena",1250,Galena,1000,-,,-,,-,,1600,8 Slots,"1890 Credits
 800 Carbon Fiber
-450 Flawless Topaz",1890,Carbon Fiber,800,Topaz (Flawless),450,-,,-,,2395,12 Slots,TBA,,-,,-,,-,,-,,0,16 Slots
-Shuttle Storage,,Storage capacity of the shuttle while in flight,2500 kg,TBA,,-,,-,,-,,-,,0,3500 kg,,,-,,-,,-,,-,,0,,,,-,,-,,-,,-,,0,
+450 Flawless Topaz",1890,Carbon Fiber,800,Topaz (Flawless),450,-,,-,,2395,12 Slots,"2150 Credits
+800 Acid
+500 Mercury",2150,Acid,800,Mercury,500,-,,-,,2800,16 Slots
+Shuttle Storage,,Storage capacity of the shuttle while in flight,2500 kg,"3500 Credits
+800 Diamond
+1200 Obsidian",3500,Diamond,800,Obsidian,1200,-,,-,,4020,3500 kg,,,-,,-,,-,,-,,0,,,,-,,-,,-,,-,,0,
 Shuttle Delivery,Capability to issue delivery orders for Workerbots to bring turrets into the field,Unlock,Disabled,"3200 Credits
 500 Fiber Optic Strands",3200,Fiber Optic Strands,500,-,,-,,-,,3450,Enabled,,,-,,-,,-,,-,,0,,,,-,,-,,-,,-,,0,

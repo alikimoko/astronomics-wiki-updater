@@ -1,29 +1,42 @@
-Identifier,Machine,Processing time,Product 1 Name,Product 1 Quantity,Input 1 Name,Input 1 Quantity,Input 2 Name,Input 2 Quantity,Input 3 Name,Input 3 Quantity,Input 4 Name,Input 4 Quantity,$ Change,Credits Change,Weight change
-Car-Bio-Car,Carbonator,25,Carbon,10,Biomass,50,-,,-,,-,,-3750,-2,-40
-Car-Bio-Pol,Carbonator,25,Polymer,20,Biomass,50,-,,-,,-,,5750,1.5,-30
-Car-Car-Gra,Carbonator,25,Graphite,10,Carbon,50,-,,-,,-,,-1750,1,-40
-Car-Bio-Res,Carbonator,25,Resin,15,Biomass,50,-,,-,,-,,2750,0.5,-35
-Con-ResSil-Pla,Converter,60,Plastics,40,Resin,10,Silica,30,-,,-,,22500,10.5,0
-Con-Iro-Nic-SR,Converter,45,Steel Rod,25,Iron,20,Nickel,5,-,,-,,14250,6.75,0
-Con-Pol-Car-CF,Converter,60,Carbon Fiber,30,Polymer,20,Carbon,20,-,,-,,14500,5.5,-10
-Con-Cop-Iro-CW,Converter,120,Copper Wire,40,Copper,30,Iron,10,-,,-,,-3000,3,0
-Con-GD-FOS,Converter,60,Fiber Optic Strands,50,Gem Dust,50,-,,-,,-,,57500,7.5,0
-Cru-CitC-GD,Crusher,10,Gem Dust,10,Citrine (Cracked),10,-,,-,,-,,2250,0,0
-Cru-CitF-GD,Crusher,10,Gem Dust,10,Citrine (Flawless),10,-,,-,,-,,-211500,-1.5,0
-Cru-OpaC-GD,Crusher,10,Gem Dust,10,Opal (Cracked),10,-,,-,,-,,0,0,0
-Cru-OpaF-GD,Crusher,10,Gem Dust,10,Opal (Flawless),10,-,,-,,-,,-256500,-1.5,0
-Cru-RubC-GD,Crusher,10,Gem Dust,10,Ruby (Cracked),10,-,,-,,-,,800,0,0
-Cru-RubF-GD,Crusher,10,Gem Dust,10,Ruby (Flawless),10,-,,-,,-,,-240500,-1.5,0
-Cru-SapC-GD,Crusher,10,Gem Dust,10,Sapphire (Cracked),10,-,,-,,-,,-3100,0,0
-Cru-SapF-GD,Crusher,10,Gem Dust,10,Sapphire (Flawless),10,-,,-,,-,,-318500,-1.5,0
-Cru-TopC-GD,Crusher,10,Gem Dust,10,Topaz (Cracked),10,-,,-,,-,,-2000,0,0
-Cru-TopF-GD,Crusher,10,Gem Dust,10,Topaz (Flawless),10,-,,-,,-,,-296500,-1.5,0
-,,,-,,-,,-,,-,,-,,0,0,0
-,,,-,,-,,-,,-,,-,,0,0,0
-,,,-,,-,,-,,-,,-,,0,0,0
-,,,-,,-,,-,,-,,-,,0,0,0
-,,,-,,-,,-,,-,,-,,0,0,0
-,,,-,,-,,-,,-,,-,,0,0,0
-,,,-,,-,,-,,-,,-,,0,0,0
-,,,-,,-,,-,,-,,-,,0,0,0
-,,,-,,-,,-,,-,,-,,0,0,0
+Identifier,Machine,Processing time,Product 1 Name,Product 1 Quantity,Product 2 Name,Product 2 Quantity,Input 1 Name,Input 1 Quantity,Input 2 Name,Input 2 Quantity,Input 3 Name,Input 3 Quantity,Input 4 Name,Input 4 Quantity,$ Change,Credits Change,Weight change
+Car-Bio-Car,Carbonator,25,Carbon,10,-,,Biomass,50,-,,-,,-,,-3750,-2,-40
+Car-Bio-Pol,Carbonator,25,Polymer,20,-,,Biomass,50,-,,-,,-,,5750,1.5,-30
+Car-Car-Gra,Carbonator,25,Graphite,10,-,,Carbon,50,-,,-,,-,,-1750,1,-40
+Car-Bio-Res,Carbonator,25,Resin,15,-,,Biomass,50,-,,-,,-,,2750,0.5,-35
+Car-Dia-Gra,Carbonator,25,Graphite,50,-,,Diamond,50,-,,-,,-,,-41250,0,0
+Car-San-GS,Carbonator,25,Glass Sheet,25,-,,Sand,50,-,,-,,-,,12500,6.25,-25
+Con-Res-Sil-Pla,Converter,60,Plastics,40,-,,Resin,10,Silica,30,-,,-,,22500,10.5,0
+Con-Iro-Nic-SR,Converter,45,Steel Rod,25,-,,Iron,20,Nickel,5,-,,-,,14250,6.75,0
+Con-Pol-Car-CF,Converter,60,Carbon Fiber,30,-,,Polymer,20,Carbon,20,-,,-,,14500,5.5,-10
+Con-Cop-Iro-CW,Converter,120,Copper Wire,40,-,,Copper,30,Iron,10,-,,-,,-3000,3,0
+Con-WatP-Pol-Hyd,Converter,60,Hydrogel,40,-,,Purified Water,20,Polymer,30,-,,-,,183875,4,-10
+Con-GD-FOS,Converter,60,Fiber Optic Strands,50,-,,Gem Dust,50,-,,-,,-,,57500,7.5,0
+Cru-Sil-San,Crusher,10,Sand,10,-,,Silica,10,-,,-,,-,,500,0,0
+Cru-Lod-MD,Crusher,10,Magnetic Dust,10,-,,Lodestone,10,-,,-,,-,,1750,0,0
+Cru-Bau-BD,Crusher,10,Bauxite Dust,10,-,,Bauxite,10,-,,-,,-,,0,0,0
+Cru-CitC-GD,Crusher,10,Gem Dust,10,-,,Citrine (Cracked),10,-,,-,,-,,2250,0,0
+Cru-CitF-GD,Crusher,10,Gem Dust,10,-,,Citrine (Flawless),10,-,,-,,-,,-211500,-1.5,0
+Cru-OpaC-GD,Crusher,10,Gem Dust,10,-,,Opal (Cracked),10,-,,-,,-,,0,0,0
+Cru-OpaF-GD,Crusher,10,Gem Dust,10,-,,Opal (Flawless),10,-,,-,,-,,-256500,-1.5,0
+Cru-RubC-GD,Crusher,10,Gem Dust,10,-,,Ruby (Cracked),10,-,,-,,-,,800,0,0
+Cru-RubF-GD,Crusher,10,Gem Dust,10,-,,Ruby (Flawless),10,-,,-,,-,,-240500,-1.5,0
+Cru-SapC-GD,Crusher,10,Gem Dust,10,-,,Sapphire (Cracked),10,-,,-,,-,,-3100,0,0
+Cru-SapF-GD,Crusher,10,Gem Dust,10,-,,Sapphire (Flawless),10,-,,-,,-,,-318500,-1.5,0
+Cru-TopC-GD,Crusher,10,Gem Dust,10,-,,Topaz (Cracked),10,-,,-,,-,,-2000,0,0
+Cru-TopF-GD,Crusher,10,Gem Dust,10,-,,Topaz (Flawless),10,-,,-,,-,,-296500,-1.5,0
+Cru-Dia-GD,Crusher,10,Gem Dust,10,-,,Diamond,10,-,,-,,-,,-5500,0,0
+Cla-Bri-WatP-Sal,Clarifier,60,Purified Water,35,Salt,10,Brine,50,-,,-,,-,,42718.75,-5.5,-5
+Cla-Wat-WatP-Bio,Clarifier,60,Purified Water,40,Biomass,5,Water,50,-,,-,,-,,31875,-4.75,-5
+Cla-Pet-Pol-Die,Clarifier,60,Diesel,35,Polymer,15,Petroleum,50,-,,-,,-,,74000,-4.5,0
+Cla-Pet-Res-Die,Clarifier,60,Diesel,35,Resin,15,Petroleum,50,-,,-,,-,,74000,-4.5,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
+,,,-,,-,,-,,-,,-,,-,,0,0,0
