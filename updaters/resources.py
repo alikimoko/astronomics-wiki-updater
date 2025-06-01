@@ -1,7 +1,7 @@
 import csv
 from typing import Tuple
 
-from.util import create_page, page_exists, run_template_modifier, database_update
+from .util import create_page, page_exists, run_template_modifier, database_update
 from mwcleric import TemplateModifierBase
 from mwparserfromhell.nodes import Template
 
@@ -10,6 +10,7 @@ prefix = "Resource/"
 pages_to_update = {
     "generic": [],
     "gem": [],
+    "liquid": [],
     "manufacture": [],
     "salvage": [],
 }
@@ -55,6 +56,27 @@ class GemResourceModifier(TemplateModifierBase):
         template.add("Name", info["Name"][:info["Name"].index("(") - 1])
         template.add("Abbreviation", info["Abbreviation"])
         template.add("Cash Value", info["$ Value"])
+
+
+class LiquidResourceModifier(TemplateModifierBase):
+    def __init__(self, site, template, new_data, **data):
+        self.new_data = new_data
+
+        super().__init__(site, template, **data)
+
+    def update_template(self, template: Template):
+        if self.current_page.namespace != 0:
+            # don't do anything outside the main namespace
+            # for example, we don't want to modify template documentation or user sandboxes
+            return
+
+        print("Updating Liquid Resource Infobox on " + self.current_page.page_title)
+        info = self.new_data[self.current_page.page_title]
+        template.add("Name", info["Name"])
+        template.add("Abbreviation", info["Abbreviation"])
+        template.add("Credit Value Class", info["Credit Value Class"])
+        template.add("Cash Value", info["$ Value"])
+        template.add("Special Property", info["Special Effect"])
 
 
 class ManufacturedResourceModifier(TemplateModifierBase):
@@ -108,19 +130,30 @@ def run():
     with open("data files/Resources.csv") as f:
         raw_resource_data = [row for row in csv.DictReader(f) if row["Name"] != "" and row["Name"] != "-"]
 
-    # Column headers: Name, Abbreviation, Credit Value Class, Gameplay Type, $ Value, Credit Value, Found at
-    # Split into resource categories
+    # Column headers:
+    # Name
+    # Abbreviation
+    # Credit Value Class
+    # Gameplay Type
+    # $ Value
+    # Credit Value
+    # Repair Cost
+    # Special Effect
+    # Found at
 
+    # Split into resource categories
     for row in raw_resource_data:
         if row["Gameplay Type"] == "Salvage":
             salvage_resource(row)
         elif row["Gameplay Type"] == "Gem":
             gem_resource(row)
+        elif row["Gameplay Type"] == "Liquid":
+            liquid_resource(row)
         elif row["Gameplay Type"] == "Manufactured":
             manufactured_resource(row)
-        elif row["Gameplay Type"] == "Unknown"\
-                or row["Gameplay Type"] == "Remains"\
-                or row["Gameplay Type"] == ""\
+        elif row["Gameplay Type"] == "Unknown" \
+                or row["Gameplay Type"] == "Remains" \
+                or row["Gameplay Type"] == "" \
                 or row["Found at"] == "Upcoming":
             # Ignore Unknown (future content), Remains (handled by Gem), upcoming content and end of valid data
             pass
@@ -141,6 +174,15 @@ def run():
             GemResourceModifier,
             "Resource Infobox/Gem",
             pages_to_update["gem"],
+            "Automatic update from new data, "
+            "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
+            new_data=data_to_update
+        )
+    if len(pages_to_update["liquid"]) > 0:
+        run_template_modifier(
+            LiquidResourceModifier,
+            "Resource Infobox/Liquid",
+            pages_to_update["liquid"],
             "Automatic update from new data, "
             "see [https://github.com/alikimoko/astronomics-wiki-updater] for update script",
             new_data=data_to_update
@@ -226,6 +268,30 @@ def gem_resource(data: dict):
 
 {{{{Main site nav}}}}
 }}}}""")
+
+
+def liquid_resource(data: dict):
+    page = full_page(data["Name"])
+    if page_exists(page):
+        # Update existing page
+        pages_to_update["liquid"].append(page)
+        data_to_update[page] = data
+    else:
+        # Create new page
+        create_page(page, f"""{{{{Beta content}}}}
+{{{{Resource Infobox/Liquid
+|Name={data["Name"]}
+|Abbreviation={data["Abbreviation"]}
+|Credit Value Class={data["Credit Value Class"]}
+|Cash Value={data["$ Value"]}
+|Value Modifier=
+|Special Property={data["Special Effect"]}
+}}}}
+
+{data["Name"]} can be found on {", ".join([f"{{{{Asteroid icon|{s}}}}}" for s in data["Found at"].split(", ")])}
+
+{{{{Main site nav}}}}
+""")
 
 
 def manufactured_resource(data: dict):
